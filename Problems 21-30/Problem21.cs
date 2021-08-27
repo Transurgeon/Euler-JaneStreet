@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections;
-using System.Numerics;
-using System.IO;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text;
 
-namespace ProjectEuler.Net
+namespace ProjectEuler.Net.Problems_21_30
 {
-    class Program
+    class Problem21
     {
-        static void Main(string[] args)
+        /*  static void Main(string[] args)
         {
             getAmicableNumbers(10000);
             Console.WriteLine(findDivisorSum(220));
@@ -44,11 +41,6 @@ namespace ProjectEuler.Net
                 }
             }
             return sum;
-        }
+        }*/
     }
-
 }
-
-    
-
-
