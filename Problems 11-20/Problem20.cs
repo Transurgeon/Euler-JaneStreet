@@ -6,35 +6,28 @@ namespace ProjectEuler.Net.Problems_1_10
 {
     class Problem20
     {
-        /*
-         static void Main(string[] args)
+        /*  
+         *  static void Main(string[] args)
         {
-            sumPrimes(2000000);
+            getFactorialDigits(100);
+            
         }
-        static void sumPrimes(int high)
+        static void getFactorialDigits(int input)
         {
-            long sum = 2;
-
-            for (int i=3; i<high; i+=2)
+            var product = new BigInteger(1);
+            var sum = new BigInteger(0);
+            for (int i = 2; i<=input; i++)
             {
-                if (isPrime(i))
-                    sum += i;
+                product *= i;
             }
 
+            while (product != 0)
+            {
+                sum += product % 10;
+                product = product / 10;
+            }
             Console.WriteLine(sum);
         }
-        static Boolean isPrime(long a)
-        {
-            if (a % 2 == 0)
-                return false;
-            for (long i = 3; i <= Math.Sqrt(a); i += 2)
-            {
-                if (a % i == 0)
-                {
-                    return false;
-                }
-            }
-            return true;
-        } */
+    */
     }
 }
