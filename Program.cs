@@ -11,39 +11,28 @@ namespace ProjectEuler.Net
     {
         static void Main(string[] args)
         {
-            getAmicableNumbers(10000);
-            Console.WriteLine(findDivisorSum(220));
-            Console.WriteLine(findDivisorSum(284));
+            DateTime dt = new DateTime(1901, 1, 6);
+            DateTime ed = new DateTime(2000, 12, 31);
+            getNumberOfSundays(dt,ed);
+            
         }
-        static void getAmicableNumbers(int high)
+        static void getNumberOfSundays(DateTime start, DateTime end)
         {
-            long sum = 0;
-            for (int i = 1; i < high; i++)
+            //int dayOfWeek = 2;
+            int count = 0;
+            while (start.Year <= end.Year)
             {
-                for (int j = i+1; j < high; j++)
-                {
-                    if (findDivisorSum(i) == j && findDivisorSum(j) == i)
-                    {
-                        sum += i;
-                        sum += j;
-                    }
-                }
+               // if (dayOfWeek > 7)
+                   // dayOfWeek = dayOfWeek % 7;
+                if (start.Day == 1)
+                    count++;
+                //incrementation
+                //dayOfWeek++;
+                start = start.AddDays(7);
+                Console.WriteLine(start);
             }
-            Console.WriteLine(sum);
-        }
-        static int findDivisorSum(int num)
-        {
-            int sum = 1;
 
-            for (int i = 2; i <= Math.Sqrt(num); i++)
-            {
-                if (num % i == 0)
-                {
-                    sum += i;
-                    sum += num / i;
-                }
-            }
-            return sum;
+            Console.WriteLine(count);
         }
     }
 
