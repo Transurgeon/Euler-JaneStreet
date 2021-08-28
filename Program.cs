@@ -11,28 +11,37 @@ namespace ProjectEuler.Net
     {
         static void Main(string[] args)
         {
-            DateTime dt = new DateTime(1901, 1, 6);
-            DateTime ed = new DateTime(2000, 12, 31);
-            getNumberOfSundays(dt,ed);
-            
-        }
-        static void getNumberOfSundays(DateTime start, DateTime end)
-        {
-            //int dayOfWeek = 2;
-            int count = 0;
-            while (start.Year <= end.Year)
-            {
-               // if (dayOfWeek > 7)
-                   // dayOfWeek = dayOfWeek % 7;
-                if (start.Day == 1)
-                    count++;
-                //incrementation
-                //dayOfWeek++;
-                start = start.AddDays(7);
-                Console.WriteLine(start);
-            }
+            string path = @"C:\Users\Admin\source\repos\ProjectEuler.Net\Problems 21-30\p022_names.txt";
 
-            Console.WriteLine(count);
+            List<string> lines = new List<string>();
+            lines = File.ReadAllLines(path).ToList();
+            String input = "";
+            foreach (String line in lines)
+            {
+                input += line + " ";
+            }
+            getScoreOfNames(input);
+        }
+        static void getScoreOfNames(String input)
+        {
+            long sum = 0;
+            String[] names = (input.Replace('"', ' ')).Split(',');
+            Array.Sort(names);
+
+            for (int i = 0; i < names.Length; i++)
+            {
+                sum += getNameofScores(names[i]) * (i + 1);
+            }
+            Console.WriteLine(sum);
+        }
+        static int getNameofScores(String input)
+        {
+            int sum = 0;
+            foreach (char s in input)
+            {
+                 sum += (int)s % 32;
+            }
+            return sum;
         }
     }
 
