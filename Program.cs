@@ -29,17 +29,27 @@ namespace ProjectEuler.Net
             {
                 if (isSumOfAbundant(abundants, num)) { 
                 sum += num;
+                Console.WriteLine(num);
                 Console.WriteLine(sum);
             }
                 num++;
             }
         }
          static bool isSumOfAbundant(List <int> numbers, int num)
-        {   
-
-            for (int i = 0; i< numbers.Count; i++)
+        {
+            int Limit = 0;
+            for (int k = 0; k<numbers.Count; k++)
             {
-                for (int j = i; j<numbers.Count; j++)
+                if (numbers[k] > num)
+                {
+                    Limit = k;
+                    break;
+                }
+
+            }
+            for (int i = 0; i< Limit; i++)
+            {
+                for (int j = i; j < Limit; j++)
                 {
                     if (num == numbers[i] + numbers[j])
                         return false;
