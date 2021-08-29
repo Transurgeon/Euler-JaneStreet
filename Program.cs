@@ -11,73 +11,36 @@ namespace ProjectEuler.Net
     {
         static void Main(string[] args)
         {
-           findNonAbundant();
+           findIndexFibonnaci(1000);
+           
         }
-        static void findNonAbundant()
+        static void findIndexFibonnaci(int digits)
         {
-            List<int> abundants = new List<int>();
-            for (int i = 1; i <= 28122; i++)
+            var num = new BigInteger(2);
+            var a = new BigInteger(1);
+            var temp = new BigInteger(0);
+            int index = 3;
+            while (getDigits(num) < digits)
             {
-                if (findDivisorSum(i) > i)
-                {
-                    abundants.Add(i);
-                }
-            }
-            int num = 1;
-            long sum = 0;
-            while (num < 28123)
-            {
-                if (isSumOfAbundant(abundants, num)) { 
-                sum += num;
+                temp = a;
+                a = num;
+                num += temp;
+                index++;
                 Console.WriteLine(num);
-                Console.WriteLine(sum);
             }
-                num++;
-            }
+            Console.WriteLine(index);
         }
-         static bool isSumOfAbundant(List <int> numbers, int num)
+        static int getDigits(BigInteger num)
         {
-            int Limit = 0;
-            for (int k = 0; k<numbers.Count; k++)
+            int sum = 0;
+            while (num != 0)
             {
-                if (numbers[k] > num)
-                {
-                    Limit = k;
-                    break;
-                }
-
-            }
-            for (int i = 0; i< Limit; i++)
-            {
-                for (int j = i; j < Limit; j++)
-                {
-                    if (num == numbers[i] + numbers[j])
-                        return false;
-                }
+                sum++;
+                num = num / 10;
             }
 
-            return true;
-        }
-        static int findDivisorSum(int num)
-        {
-            int sum = 1;
-
-            for (int i = 2; i <= Math.Sqrt(num); i++)
-            {
-                if (num % i == 0)
-                {
-                    if (i == Math.Sqrt(num))
-                        sum += i;
-                    else
-                    {
-                        sum += i;
-                        sum += num / i;
-                    }
-                }
-            }
             return sum;
         }
-       
     }
 
 }
