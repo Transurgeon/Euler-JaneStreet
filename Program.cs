@@ -11,37 +11,60 @@ namespace ProjectEuler.Net
     {
         static void Main(string[] args)
         {
-            findLongestRecurringCycle(1000);
-            //Console.WriteLine(findRecurringCycle(3));
+            findLongestQuadraticPrimes(1000);
+            //Console.WriteLine(getLongestPrimeSeq(-79, 1601));
         }
-        static void findLongestRecurringCycle(int limit)
+        static void findLongestQuadraticPrimes(int limit)
         {
-            int largest = 2;
-            int largestCycle = 0;
-            for (int i = 2; i<=limit; i++)
+            int largest = 0;
+            int a = 0; int b = 0;
+           for (int i = 1; i < limit; i+=2)
             {
-                if (i % 2 != 0 && i % 5 != 0)
+                for (int j = 1; j < limit; j +=2)
                 {
-                    if (findRecurringCycle(i) > largestCycle) { 
-                    largest = i; 
-                    largestCycle = findRecurringCycle(largest);
-                    Console.WriteLine(i + ", " + largestCycle);
+                    if (getLongestPrimeSeq(-i,j) > largest)
+                    {
+                        a = -i; b = j;
+                        largest = getLongestPrimeSeq(-i, j);
+                        Console.WriteLine((a * b) + ", " + a + ", " + b + ", " + largest);
+                    }
+                    else if (getLongestPrimeSeq(i, j) > largest)
+                    {
+                        a = i; b = j;
+                        largest = getLongestPrimeSeq(i, j);
+                        Console.WriteLine((a * b) + ", " + a + ", " + b + ", " + largest);
                     }
                 }
-                
             }
-            Console.WriteLine(largest);
+            Console.WriteLine((a*b)+", "+ a + ", " + b + ", " + largest);
         }
         
-        static int findRecurringCycle (BigInteger num)
+        static int getLongestPrimeSeq(int a, int b)
         {
-            int n = 1;
-            while (true)
+            int n = 0;
+            do
             {
-                if ((BigInteger.Pow(10, n) - 1) % num == 0) 
+                if (isPrime(n * n + n * a + b))
+                    n++;
+                else
                     return n;
-                n++;
+
+            } while (true);
+        }
+        static Boolean isPrime(long a)
+        {
+            if (a < 0)
+                return false;
+            if (a % 2 == 0)
+                return false;
+            for (long i = 3; i <= Math.Sqrt(a); i += 2)
+            {
+                if (a % i == 0)
+                {
+                    return false;
+                }
             }
+            return true;
         }
     }
 
