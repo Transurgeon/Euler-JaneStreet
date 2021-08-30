@@ -11,35 +11,37 @@ namespace ProjectEuler.Net
     {
         static void Main(string[] args)
         {
-           findIndexFibonnaci(1000);
-           
+            findLongestRecurringCycle(1000);
+            //Console.WriteLine(findRecurringCycle(3));
         }
-        static void findIndexFibonnaci(int digits)
+        static void findLongestRecurringCycle(int limit)
         {
-            var num = new BigInteger(2);
-            var a = new BigInteger(1);
-            var temp = new BigInteger(0);
-            int index = 3;
-            while (getDigits(num) < digits)
+            int largest = 2;
+            int largestCycle = 0;
+            for (int i = 2; i<=limit; i++)
             {
-                temp = a;
-                a = num;
-                num += temp;
-                index++;
-                Console.WriteLine(num);
+                if (i % 2 != 0 && i % 5 != 0)
+                {
+                    if (findRecurringCycle(i) > largestCycle) { 
+                    largest = i; 
+                    largestCycle = findRecurringCycle(largest);
+                    Console.WriteLine(i + ", " + largestCycle);
+                    }
+                }
+                
             }
-            Console.WriteLine(index);
+            Console.WriteLine(largest);
         }
-        static int getDigits(BigInteger num)
+        
+        static int findRecurringCycle (BigInteger num)
         {
-            int sum = 0;
-            while (num != 0)
+            int n = 1;
+            while (true)
             {
-                sum++;
-                num = num / 10;
+                if ((BigInteger.Pow(10, n) - 1) % num == 0) 
+                    return n;
+                n++;
             }
-
-            return sum;
         }
     }
 
