@@ -11,25 +11,59 @@ namespace ProjectEuler.Net
     {
         static void Main(string[] args)
         {
-            findDistinctPowers(100);
+             Console.WriteLine(findNthPermutation(9,999999));
+            //Console.WriteLine(isPermutation(1235476890));
         }
-        static void findDistinctPowers(int power)
+        static string findNthPermutation(int lastDigit, int n)
         {
-            List<BigInteger> distinct = new List<BigInteger>();
-            for (int i = 2; i<= power; i++)
+            
+            if ((lastDigit < 0 && lastDigit > 9) || (n < 1 && n > getFactorial(lastDigit + 1)))
+                return "!";
+            string digits = "";
+            for (int i = 0; i<=lastDigit; i++)
             {
-                for (int j = 2; j<= power; j++)
-                {
-                    var pow = new BigInteger(Math.Pow(i, j));
-                    if (distinct.Contains(pow) == false)
-                        distinct.Add(pow);
-                }
+                digits += i;
             }
-            for (int c = 0; c< distinct.Count; c++)
+            int index;
+            string nthPerm = "";
+            string result = "";
+            for (int i = lastDigit; i>=0; i--)
             {
-                Console.WriteLine(distinct[c]);
+                index = n / getFactorial(i);
+                n = n - (index*getFactorial(i));
+                Console.WriteLine(index);
+                nthPerm = digits.Substring(index, 1);
+                result += digits.Substring(index, 1);
+                digits = digits.Replace(nthPerm.ToString(),"");
+                Console.WriteLine(digits);
             }
-            Console.WriteLine(distinct.Count);
+            return result;
+        }
+      /*  static bool isPermutation(long num)
+        {
+            String str;
+            if (num < 1000000000)
+                str = "0" + num;
+            else
+                str = ""+num;
+
+            for (int i = 9; i>=0; i--)
+            {
+                str = str.Replace(i.ToString(),"");
+                if (str.Length != i)
+                    return false;
+            }
+            return true;
+        } */
+
+        static int getFactorial(int n)
+        {
+            int product = 1;
+            for (int i = 2; i<=n; i++)
+            {
+                product *= i;
+            }
+            return product;
         }
     }
 }
