@@ -11,29 +11,25 @@ namespace ProjectEuler.Net
     {
         static void Main(string[] args)
         {
-            findSumDiagonalSpiral(1001);
+            findDistinctPowers(100);
         }
-        static void findSumDiagonalSpiral(int grid)
+        static void findDistinctPowers(int power)
         {
-            var sum = new BigInteger(1);
-            int count = 0;
-            int skip = 2;
-            int a = 3;
-            while (a <= grid * grid)
-            { 
-                count++;
-                if (count == 4)
+            List<BigInteger> distinct = new List<BigInteger>();
+            for (int i = 2; i<= power; i++)
+            {
+                for (int j = 2; j<= power; j++)
                 {
-                    count = 0;
-                    skip += 2;
-                    Console.WriteLine(skip);
+                    var pow = new BigInteger(Math.Pow(i, j));
+                    if (distinct.Contains(pow) == false)
+                        distinct.Add(pow);
                 }
-                sum += a;
-                a += skip;
-               
             }
-            Console.WriteLine(sum);
-
+            for (int c = 0; c< distinct.Count; c++)
+            {
+                Console.WriteLine(distinct[c]);
+            }
+            Console.WriteLine(distinct.Count);
         }
     }
 }

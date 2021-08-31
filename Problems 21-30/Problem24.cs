@@ -7,13 +7,18 @@ namespace ProjectEuler.Net.Problems_21_30
     class Problem24
     {
         /*
-         * static void Main(string[] args)
+         *   static void Main(string[] args)
         {
-           findLexicographicOrder(9,1000000);
+            findLexicographicOrder(9, 1000000);
         }
         static void findLexicographicOrder(int num, int permutation)
         {
-           
+            String str = "";
+            for (int i = 0; i<=num; i++)
+            {
+
+            }
+            Console.WriteLine(str);
         }
         */
     }
