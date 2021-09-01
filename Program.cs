@@ -11,26 +11,45 @@ namespace ProjectEuler.Net
     {
         static void Main(string[] args)
         {
-            
-            
-            int[] coins= { 1, 2, 5, 10, 20, 50, 100, 200};
-            findCoinSums(200, coins);
+            findPandigitalProducts();
         }
-        static void findCoinSums(int target, int[] coins)
+        static void findPandigitalProducts()
         {
-            int[] ways = new int[target + 1];
-            ways[0] = 1;
-            for (int i = 0; i<coins.Length; i++)
+            String str = "";
+            List<int> products = new List<int>();
+            int sum = 0;
+            for (int i = 1; i<9876; i++)
             {
-                for (int j = 0; j < ways.Length; j++)
+                for (int j = 1; j<100; j++)
                 {
-                    if (coins[i] <= j)
-                        ways[j] += ways[j - coins[i]];
+                    str = i+""+j+"" + (i * j);
+                    if (isPandigital(str))
+                    {
+                        if (products.Contains(i * j) == false)
+                        {
+                            Console.WriteLine(str + "," + (i * j));
+                            products.Add(i * j);
+                            sum += (i * j);
+                        }
+                    }
                 }
             }
-            Console.WriteLine( ways[target]);
+            Console.WriteLine(sum);
         }
-
+        static bool isPandigital(String concat)
+        {
+            if (concat.Contains('0'))
+                return false;
+            int length = concat.Length;
+            for (int i = 1; i <= 9; i++)
+            {
+                concat = concat.Replace(i.ToString(), "");
+                length--;
+                   if (concat.Length != length)
+                    return false;
+            }
+            return true;
+        }
     }
 }
 
