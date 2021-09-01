@@ -12,34 +12,25 @@ namespace ProjectEuler.Net
         static void Main(string[] args)
         {
             
-            find5thDigitPower();
+            
+            int[] coins= { 1, 2, 5, 10, 20, 50, 100, 200};
+            findCoinSums(200, coins);
         }
-        static void find5thDigitPower()
+        static void findCoinSums(int target, int[] coins)
         {
-            int sum = 0;
-            for (int i = 100; i<300000; i++)
+            int[] ways = new int[target + 1];
+            ways[0] = 1;
+            for (int i = 0; i<coins.Length; i++)
             {
-                if (is5thDigitPow(i))
+                for (int j = 0; j < ways.Length; j++)
                 {
-                    sum += i;
+                    if (coins[i] <= j)
+                        ways[j] += ways[j - coins[i]];
                 }
             }
-            Console.WriteLine(sum);
+            Console.WriteLine( ways[target]);
         }
-        static bool is5thDigitPow(int num)
-        {
-            int sum = 0;
-            int final = num;
-            while(num!= 0)
-            {
-                sum += (int)Math.Pow((num %10), 5);
-                num = num / 10;
-            }
-            if (sum == final)
-                return true;
-            else
-            return false;
-        }
+
     }
 }
 
