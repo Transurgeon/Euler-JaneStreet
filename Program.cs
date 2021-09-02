@@ -11,41 +11,38 @@ namespace ProjectEuler.Net
     {
         static void Main(string[] args)
         {
-            findPandigitalProducts();
+            findDigitFactorials();
         }
-        static void findPandigitalProducts()
+        static void findDigitFactorials()
         {
-            double product = 1;
-            for (int i = 11; i<100; i++)
+            int sum = 0;
+            for (int i = 3; i<= 2540160; i++)
             {
-                if (i % 10 != 0)
-                {
-                    for (int j = i + 1; j < 100; j++)
-                    {
-                        if (j % 10 != 0)
-                        {
-                            if (isSpecialFraction(i, j))
-                                Console.WriteLine(i + "/" + j);
-                        }
-                    }
-                }
+                if (isSumOfFactorial(i))
+                    sum += i;
             }
-        }
-        static bool isSpecialFraction(int a, int b)
-        {
-            if (((a % 10 == b % 10) && isEquals(((double)a) / b, ((double)(a / 10)) / (b / 10)))
-            ||  ((a % 10 == b / 10) && isEquals(((double)a) / b, ((double)(a / 10)) / (b % 10)))
-            ||  ((a / 10 == b % 10) && isEquals(((double)a) / b, ((double)(a % 10)) / (b / 10)))
-            ||  ((a / 10 == b / 10) && isEquals(((double)a) / b, ((double)(a % 10)) / (b % 10)))
-            )
-                return true;
-
-            return false;
+            Console.WriteLine(sum);
         }
 
-        static bool isEquals(double first, double second)
+        static bool isSumOfFactorial(int num)
         {
-            return Math.Abs(first - second) < Math.Pow(10, -4);
+            int sum = 0;
+            int n = num;
+            while (n!=0)
+            {
+                sum += getFactorial(n % 10);
+                n = n / 10;
+            }
+            return sum == num;
+        }
+        static int getFactorial(int num)
+        {
+            int product = 1;
+            for (int i = num; i>1; i--)
+            {
+                product *= i;
+            }
+            return product;
         }
     }
 }
