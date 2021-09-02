@@ -11,59 +11,63 @@ namespace ProjectEuler.Net
     {
         static void Main(string[] args)
         {
-            findDoublePalyndrome(1000000);
+           findTruncatablePrimes();
+            //Console.WriteLine(isTruncatedPrime(3797));
         }
-        static void findDoublePalyndrome(int limit)
+        static void findTruncatablePrimes()
         {
-            int sum = 0;
-            for (int i = 1; i<limit; i++)
+            long sum = 0;
+            int count = 0;
+            int n = 8;
+            while (count < 11)
             {
-                if (isPalyndrome(i.ToString()) && isPalyndrome(getBinary(i)))
+                if (isPrime(n))
                 {
-                    Console.WriteLine(i + ", " + getBinary(i));
-                    sum += i;
+                    if (isTruncatedPrime(n))
+                    {
+                        Console.WriteLine(n);
+                        sum += n;
+                        count++;
+                    }
                 }
+                n++;
             }
             Console.WriteLine(sum);
         }
-        static string getBinary(int n)
+        static Boolean isPrime(long a)
         {
-            int high = (int)Math.Log2(n);
-            string binary = "";
-            do
+            if (a < 2)
+                return false;
+            if (a % 2 == 0 && a != 2)
+                return false;
+            for (int i = 3; i <= Math.Sqrt(a); i += 2)
             {
-                if (n > (int)Math.Pow(2, high))
+                if (a % i == 0)
                 {
-                    n = n - (int)Math.Pow(2, high);
-                    binary += 1;
+                    return false;
                 }
-                else if (n == (int)Math.Pow(2, high))
-                {
-                    n = n - (int)Math.Pow(2, high);
-                    binary += 1;
-                    for (int i = high; i>0; i--)
-                    {
-                        binary += 0;
-                    }
-                }
-                else
-                    binary += 0;
-                
-                high--;
-            } while (n != 0);
-            return binary;
-        }
-        static bool isPalyndrome(string num)
-        {
-            string reverse = "";
-
-            for (int i = num.Length-1; i>=0; i--)
-            {
-                reverse += num[i];
             }
-            if (reverse == num)
-                return true;
-            return false;
+            return true;
+        }
+        static bool isTruncatedPrime(int num)
+        {
+            int high = (int)Math.Log10(num);
+            long right; long left;
+            for (int i = 1; i<=high; i++)
+            {
+                right = num % (int)Math.Pow(10, i);
+               // Console.WriteLine(right);
+                if (!isPrime(right))
+                    return false;
+            }
+            for (int i = high; i>0; i--)
+            {
+                left = num / (int)Math.Pow(10, i);
+               // Console.WriteLine(left);
+                if (!isPrime(left))
+                    return false;
+            }
+            return true;
         }
     }
 }
