@@ -15,40 +15,37 @@ namespace ProjectEuler.Net
         }
         static void findPandigitalProducts()
         {
-            String str = "";
-            List<int> products = new List<int>();
-            int sum = 0;
-            for (int i = 1; i<9876; i++)
+            double product = 1;
+            for (int i = 11; i<100; i++)
             {
-                for (int j = 1; j<100; j++)
+                if (i % 10 != 0)
                 {
-                    str = i+""+j+"" + (i * j);
-                    if (isPandigital(str))
+                    for (int j = i + 1; j < 100; j++)
                     {
-                        if (products.Contains(i * j) == false)
+                        if (j % 10 != 0)
                         {
-                            Console.WriteLine(str + "," + (i * j));
-                            products.Add(i * j);
-                            sum += (i * j);
+                            if (isSpecialFraction(i, j))
+                                Console.WriteLine(i + "/" + j);
                         }
                     }
                 }
             }
-            Console.WriteLine(sum);
         }
-        static bool isPandigital(String concat)
+        static bool isSpecialFraction(int a, int b)
         {
-            if (concat.Contains('0'))
-                return false;
-            int length = concat.Length;
-            for (int i = 1; i <= 9; i++)
-            {
-                concat = concat.Replace(i.ToString(), "");
-                length--;
-                   if (concat.Length != length)
-                    return false;
-            }
-            return true;
+            if (((a % 10 == b % 10) && isEquals(((double)a) / b, ((double)(a / 10)) / (b / 10)))
+            ||  ((a % 10 == b / 10) && isEquals(((double)a) / b, ((double)(a / 10)) / (b % 10)))
+            ||  ((a / 10 == b % 10) && isEquals(((double)a) / b, ((double)(a % 10)) / (b / 10)))
+            ||  ((a / 10 == b / 10) && isEquals(((double)a) / b, ((double)(a % 10)) / (b % 10)))
+            )
+                return true;
+
+            return false;
+        }
+
+        static bool isEquals(double first, double second)
+        {
+            return Math.Abs(first - second) < Math.Pow(10, -4);
         }
     }
 }
