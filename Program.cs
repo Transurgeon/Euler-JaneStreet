@@ -11,54 +11,59 @@ namespace ProjectEuler.Net
     {
         static void Main(string[] args)
         {
-             findCircularPrimes(1000000);
-           //Console.WriteLine( isCircularPrime(29));
+            findDoublePalyndrome(1000000);
         }
-        static void findCircularPrimes(int limit)
+        static void findDoublePalyndrome(int limit)
         {
-            int count = 0;
-            int j = 0;
-            for (int i = 2; i < limit; i++)
+            int sum = 0;
+            for (int i = 1; i<limit; i++)
             {
-                if (isPrime(i))
+                if (isPalyndrome(i.ToString()) && isPalyndrome(getBinary(i)))
                 {
-                    if (isCircularPrime(i))
-                      count++;
+                    Console.WriteLine(i + ", " + getBinary(i));
+                    sum += i;
                 }
             }
-            Console.WriteLine(count);
+            Console.WriteLine(sum);
         }
-
-        static bool isCircularPrime(int prime)
+        static string getBinary(int n)
         {
-            if (!isPrime(prime))
-                return false;
-            if (prime < 10)
-                return true;
-            int length = (int)Math.Log10(prime);
-            int i = (prime % 10) * (int)Math.Pow(10, length) + prime/10;
+            int high = (int)Math.Log2(n);
+            string binary = "";
             do
             {
-                if (!isPrime(i))
-                    return false;
-                i = (i % 10) * (int)Math.Pow(10, length) + i / 10;
-            } while (i != prime);
-            return true;
-        }
-        static Boolean isPrime(int a)
-        {
-            if (a < 2)
-                return false;
-            if (a % 2 == 0 && a != 2)
-                return false;
-            for (int i = 3; i <= Math.Sqrt(a); i += 2)
-            {
-                if (a % i == 0)
+                if (n > (int)Math.Pow(2, high))
                 {
-                    return false;
+                    n = n - (int)Math.Pow(2, high);
+                    binary += 1;
                 }
+                else if (n == (int)Math.Pow(2, high))
+                {
+                    n = n - (int)Math.Pow(2, high);
+                    binary += 1;
+                    for (int i = high; i>0; i--)
+                    {
+                        binary += 0;
+                    }
+                }
+                else
+                    binary += 0;
+                
+                high--;
+            } while (n != 0);
+            return binary;
+        }
+        static bool isPalyndrome(string num)
+        {
+            string reverse = "";
+
+            for (int i = num.Length-1; i>=0; i--)
+            {
+                reverse += num[i];
             }
-            return true;
+            if (reverse == num)
+                return true;
+            return false;
         }
     }
 }
