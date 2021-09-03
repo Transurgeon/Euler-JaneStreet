@@ -10,45 +10,47 @@ namespace ProjectEuler.Net
     class Program
     {
         static void Main(string[] args)
-        {
-            string path = @"C:\Users\Admin\source\repos\ProjectEuler.Net\Problems 41-50\p042_words.txt";
-
-            List<string> lines = new List<string>();
-            lines = File.ReadAllLines(path).ToList();
-            String input = "";
-            foreach (String line in lines)
-            {
-                input += line + " ";
-            }
-            findTriangleWords(input);
+        {    
+            
+            findSubStringDivisibility();
+            //Console.WriteLine(isSubDivisible("1406357829",primes));
         }
-        static void findTriangleWords(String input)
+        static void findSubStringDivisibility()
         {
-            int count = 0;
-            String[] words = (input.Replace('"', ' ')).Split(',');
-
-            for (int i = 0; i < words.Length; i++)
+            long sum = 0;
+            long[] primes = { 2, 3, 5, 7, 11, 13, 17 };
+            for (long i = 1000000000; i<9876543210; i++)
             {
-
-                if ((((-1 + Math.Sqrt(1 + 8 * getScoreOfWord(words[i]))) / 2) - Math.Floor(((-1 + Math.Sqrt(1 + 8 * getScoreOfWord(words[i]))) / 2))) < 0.0001)
+                if (isPandigital(i.ToString()) && isSubDivisible(i.ToString(),primes))
                 {
-                    count++;
-                    Console.WriteLine(words[i] + ", " + count);
+                        Console.WriteLine(sum + "," + i);
+                        sum += i;
                 }
-
             }
-            Console.WriteLine(count);
+            Console.WriteLine(sum);
         }
-        static int getScoreOfWord(String input)
+        static bool isPandigital(String concat)
         {
-            int sum = 0;
-            foreach (char s in input)
+            int length = concat.Length;
+            for (int i = 0; i <= 9; i++)
             {
-                sum += (int)s % 32;
+                concat = concat.Replace(i.ToString(), "");
+                length--;
+                if (concat.Length != length)
+                    return false;
             }
-            return sum;
+            return true;
         }
 
+        static bool isSubDivisible(String num, long[] primes)
+        {
+            for (int j = 2; j <= 8; j++)
+            {
+                if (long.Parse(num.Substring(j - 1, 3)) % primes[j - 2] != 0)
+                    return false;
+            }
+            return true;
+        }
     }
 }
 
