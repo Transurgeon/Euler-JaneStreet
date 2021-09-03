@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections;
-using System.Numerics;
-using System.IO;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text;
 
-namespace ProjectEuler.Net
+namespace ProjectEuler.Net.Problems_41_50
 {
-    class Program
+    class Problem41
     {
-        static void Main(string[] args)
+        /*         static void Main(string[] args)
         {
             findPandigitalPrime();
            
@@ -56,11 +53,6 @@ namespace ProjectEuler.Net
                 }
             }
             return true;
-        }
+        }*/
     }
 }
-
-
-    
-
-
