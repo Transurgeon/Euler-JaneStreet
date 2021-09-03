@@ -11,52 +11,44 @@ namespace ProjectEuler.Net
     {
         static void Main(string[] args)
         {
-            findPandigitalPrime();
-           
+            string path = @"C:\Users\Admin\source\repos\ProjectEuler.Net\Problems 41-50\p042_words.txt";
+
+            List<string> lines = new List<string>();
+            lines = File.ReadAllLines(path).ToList();
+            String input = "";
+            foreach (String line in lines)
+            {
+                input += line + " ";
+            }
+            findTriangleWords(input);
         }
-        static void findPandigitalPrime()
+        static void findTriangleWords(String input)
         {
-            long largest = 2;
-            for (long i = 1; i<=7654321; i+=2)
+            int count = 0;
+            String[] words = (input.Replace('"', ' ')).Split(',');
+
+            for (int i = 0; i < words.Length; i++)
             {
 
-                if (isPrime(i) && isPandigital(i.ToString()))
+                if ((((-1 + Math.Sqrt(1 + 8 * getScoreOfWord(words[i]))) / 2) - Math.Floor(((-1 + Math.Sqrt(1 + 8 * getScoreOfWord(words[i]))) / 2))) < 0.0001)
                 {
-                    Console.WriteLine(i);
-                    largest = i;
+                    count++;
+                    Console.WriteLine(words[i] + ", " + count);
                 }
+
             }
-            Console.WriteLine(largest);
+            Console.WriteLine(count);
         }
-        static bool isPandigital(String concat)
+        static int getScoreOfWord(String input)
         {
-            if (concat.Contains('0'))
-                return false;
-            int length = concat.Length;
-            for (int i = concat.Length; i > 0; i--)
+            int sum = 0;
+            foreach (char s in input)
             {
-                concat = concat.Replace(i.ToString(), "");
-                length--;
-                if (concat.Length != length)
-                    return false;
+                sum += (int)s % 32;
             }
-            return true;
+            return sum;
         }
-        static Boolean isPrime(long a)
-        {
-            if (a < 2)
-                return false;
-            if (a % 2 == 0 && a != 2)
-                return false;
-            for (int i = 3; i <= Math.Sqrt(a); i += 2)
-            {
-                if (a % i == 0)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
+
     }
 }
 
