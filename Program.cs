@@ -11,45 +11,37 @@ namespace ProjectEuler.Net
     {
         static void Main(string[] args)
         {
-           findPandigitalMultiples();
+           findRightTriangle(1000);
 
         }
-        static void findPandigitalMultiples()
+        static void findRightTriangle(int n)
         {
             int largest = 0;
-            string str = ""; 
-            for (int i = 1; i<9999; i++)
+            int largestPos = 0;
+            int[] numSolutions = new int[n + 1];
+
+            for (int i = 1; i < n; i++)
             {
-                for (int j = 2; j <= 5; j++)
+                for (int j = i + 1; j < n; j++)
                 {
-                    str = "";
-                    for (int k = 1; k<=j; k++)
+                    if (i + j + ((int)Math.Sqrt(i * i + j * j)) <= 1000)
                     {
-                        str += "" + (i * k);
-                    }
-                    if (isPandigital(str))
-                    {
-                        Console.WriteLine(str+","+i+","+j);
-                        if (int.Parse(str) > largest)
-                            largest = int.Parse(str);
+                        if (Math.Sqrt(i * i + j * j) - Math.Floor(Math.Sqrt(i * i + j * j)) < 0.0001)
+                            numSolutions[i + j + ((int)Math.Sqrt(i * i + j * j))]++;
                     }
                 }
+
             }
-            Console.WriteLine(largest);
-        }
-        static bool isPandigital(String concat)
-        {
-            if (concat.Contains('0'))
-                return false;
-            int length = concat.Length;
-            for (int i = 1; i <= 9; i++)
+            for (int k = 0; k< n; k++)
             {
-                concat = concat.Replace(i.ToString(), "");
-                length--;
-                if (concat.Length != length)
-                    return false;
+                if (numSolutions[k] > largest)
+                {
+                    Console.WriteLine(largestPos + ", " + largest);
+                    largest = numSolutions[k];
+                    largestPos = k;
+                }
             }
-            return true;
+            Console.WriteLine(largestPos+", " + numSolutions[largestPos]);
         }
 
     }
