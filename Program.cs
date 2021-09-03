@@ -11,64 +11,47 @@ namespace ProjectEuler.Net
     {
         static void Main(string[] args)
         {
-           findTruncatablePrimes();
-            //Console.WriteLine(isTruncatedPrime(3797));
+           findPandigitalMultiples();
+
         }
-        static void findTruncatablePrimes()
+        static void findPandigitalMultiples()
         {
-            long sum = 0;
-            int count = 0;
-            int n = 8;
-            while (count < 11)
+            int largest = 0;
+            string str = ""; 
+            for (int i = 1; i<9999; i++)
             {
-                if (isPrime(n))
+                for (int j = 2; j <= 5; j++)
                 {
-                    if (isTruncatedPrime(n))
+                    str = "";
+                    for (int k = 1; k<=j; k++)
                     {
-                        Console.WriteLine(n);
-                        sum += n;
-                        count++;
+                        str += "" + (i * k);
+                    }
+                    if (isPandigital(str))
+                    {
+                        Console.WriteLine(str+","+i+","+j);
+                        if (int.Parse(str) > largest)
+                            largest = int.Parse(str);
                     }
                 }
-                n++;
             }
-            Console.WriteLine(sum);
+            Console.WriteLine(largest);
         }
-        static Boolean isPrime(long a)
+        static bool isPandigital(String concat)
         {
-            if (a < 2)
+            if (concat.Contains('0'))
                 return false;
-            if (a % 2 == 0 && a != 2)
-                return false;
-            for (int i = 3; i <= Math.Sqrt(a); i += 2)
+            int length = concat.Length;
+            for (int i = 1; i <= 9; i++)
             {
-                if (a % i == 0)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-        static bool isTruncatedPrime(int num)
-        {
-            int high = (int)Math.Log10(num);
-            long right; long left;
-            for (int i = 1; i<=high; i++)
-            {
-                right = num % (int)Math.Pow(10, i);
-               // Console.WriteLine(right);
-                if (!isPrime(right))
-                    return false;
-            }
-            for (int i = high; i>0; i--)
-            {
-                left = num / (int)Math.Pow(10, i);
-               // Console.WriteLine(left);
-                if (!isPrime(left))
+                concat = concat.Replace(i.ToString(), "");
+                length--;
+                if (concat.Length != length)
                     return false;
             }
             return true;
         }
+
     }
 }
 
