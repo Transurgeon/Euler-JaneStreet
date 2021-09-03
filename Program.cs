@@ -11,37 +11,27 @@ namespace ProjectEuler.Net
     {
         static void Main(string[] args)
         {
-           findRightTriangle(1000);
+            findChampernowne();
 
         }
-        static void findRightTriangle(int n)
+        static void findChampernowne()
         {
-            int largest = 0;
-            int largestPos = 0;
-            int[] numSolutions = new int[n + 1];
-
-            for (int i = 1; i < n; i++)
+            int count = 1;
+            int digitCount = 1;
+            int powerDigit = 0;
+            int product = 1;
+            while (digitCount <= 1000010)
             {
-                for (int j = i + 1; j < n; j++)
+                if (digitCount >= (int)Math.Pow(10, powerDigit))
                 {
-                    if (i + j + ((int)Math.Sqrt(i * i + j * j)) <= 1000)
-                    {
-                        if (Math.Sqrt(i * i + j * j) - Math.Floor(Math.Sqrt(i * i + j * j)) < 0.0001)
-                            numSolutions[i + j + ((int)Math.Sqrt(i * i + j * j))]++;
-                    }
+                    product *= int.Parse(count.ToString().Substring((int)(digitCount - Math.Pow(10, powerDigit)),1));
+                    powerDigit++;
                 }
-
+                
+                digitCount += count.ToString().Length;
+                count++;
             }
-            for (int k = 0; k< n; k++)
-            {
-                if (numSolutions[k] > largest)
-                {
-                    Console.WriteLine(largestPos + ", " + largest);
-                    largest = numSolutions[k];
-                    largestPos = k;
-                }
-            }
-            Console.WriteLine(largestPos+", " + numSolutions[largestPos]);
+            Console.WriteLine(product);
         }
 
     }
