@@ -11,33 +11,37 @@ namespace ProjectEuler.Net
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(findGoldBachConjecture());
+           Console.WriteLine(findDistinctPrimeFactors(4));
         }
 
-        static long findGoldBachConjecture()
+        static List<int> primes = new List<int>();
+        static int findDistinctPrimeFactors(int disctint)
         {
-            long n = 9;
+            int n = 2;
             while (true)
             {
-                if (!isGoldBach(n))
+                if (isPrime(n))
+                    primes.Add(n);
+                else if (isN_Distinct(disctint,n) && isN_Distinct(disctint,n + 1) && isN_Distinct(disctint, n + 2) && isN_Distinct(disctint, n + 3))
                     return n;
-                n+= 2;
+                n++;
             }
         }
-
-        static bool isGoldBach(long num)
+        static bool isN_Distinct(int disctint, int num)
         {
-            if (isPrime(num))
-                return true;
-            List<long> primes = new List<long>();
-            for (long i = 2; i<=num; i++)
+            int factorCount = 0;
+            for (int i = 0; i<primes.Count; i++)
             {
-                if (isPrime(i))
-                {
-                    if (((Math.Sqrt((num - i) / 2)) - Math.Floor(Math.Sqrt((num - i) / 2))) < 0.0000001)
-                        return true;
-                }   
+                if (num %  primes[i] == 0) {
+                    do
+                    {
+                        num = num / primes[i];
+                    } while (num % primes[i] == 0);
+                    factorCount++;
+                }
             }
+            if (factorCount == disctint)
+                return true;
             return false;
         }
         static Boolean isPrime(long a)
