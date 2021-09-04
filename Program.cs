@@ -10,46 +10,42 @@ namespace ProjectEuler.Net
     class Program
     {
         static void Main(string[] args)
-        {    
-            
-            findSubStringDivisibility();
-            //Console.WriteLine(isSubDivisible("1406357829",primes));
-        }
-        static void findSubStringDivisibility()
         {
-            long sum = 0;
-            long[] primes = { 2, 3, 5, 7, 11, 13, 17 };
-            for (long i = 1000000000; i<9876543210; i++)
-            {
-                if (isPandigital(i.ToString()) && isSubDivisible(i.ToString(),primes))
-                {
-                        Console.WriteLine(sum + "," + i);
-                        sum += i;
-                }
-            }
-            Console.WriteLine(sum);
-        }
-        static bool isPandigital(String concat)
-        {
-            int length = concat.Length;
-            for (int i = 0; i <= 9; i++)
-            {
-                concat = concat.Replace(i.ToString(), "");
-                length--;
-                if (concat.Length != length)
-                    return false;
-            }
-            return true;
-        }
 
-        static bool isSubDivisible(String num, long[] primes)
+            Console.WriteLine(findPentagonalDifference());
+           
+        }
+        static long P(long n)
         {
-            for (int j = 2; j <= 8; j++)
+            return (3 * n * n - n)/2;
+        }
+        static bool isPentagonal(long Pn)
+        {
+            return (1 + Math.Sqrt(1+24*Pn))/6 - Math.Floor((1 + Math.Sqrt(1 + 24 * Pn)) / 6) < 0.0001;
+        }
+        static long findPentagonalDifference()
+        {
+            long n = 2;
+            long lowest = 100000000;
+            bool brake = false; 
+            long i;
+            while (!brake)
             {
-                if (long.Parse(num.Substring(j - 1, 3)) % primes[j - 2] != 0)
-                    return false;
+                brake = true;
+                i = n - 1;
+                while(P(n)-P(i) < lowest && i >= 1)
+                { 
+                    if (isPentagonal(P(n) - P(i)) && isPentagonal(P(n) + P(i)))
+                    {
+                        lowest = P(n) - P(i);
+                        Console.WriteLine(n + "," + i + "," + P(n) + "," + P(i));
+                    }
+                    brake = false;
+                    i--;
+                }
+                n++;
             }
-            return true;
+            return lowest;
         }
     }
 }
