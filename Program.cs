@@ -11,38 +11,49 @@ namespace ProjectEuler.Net
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(findMaximalDigitSum());
+            Console.WriteLine(findPrimeSpiralUnder10());
         }
-        static int findMaximalDigitSum()
+        static int findPrimeSpiralUnder10()
+        {   
+            double length = findPrimeDiagonalSpiral(3,0,1,2,1);
+            return (int)length;
+        }
+        static double findPrimeDiagonalSpiral(int grid,int primeCount, int diagCount, int skip, int a)
         {
-            int largest = 0;
-            for (int i = 1; i<=100; i++)
-            {
-                for (int j = 1; j <= 100; j++)
+            while (true)
+            {                
+                Console.WriteLine(grid + "," + primeCount + "," + diagCount + "," + skip + "," + a);
+
+                for (int i = 0; i < 4; i++)
                 {
-                    if (findDigitSum(i,j) > largest)
+                    a += skip;
+                    if (isPrime(a))
                     {
-                        largest = findDigitSum(i,j);
-                        Console.WriteLine(i + "," + j+","+largest);
+                        primeCount++;
                     }
                 }
+
+                diagCount += 4; 
+                if (((double)primeCount / diagCount) < 0.1000000)
+                    return grid; 
+                grid += 2;
+                skip += 2;
             }
-            return largest;
         }
-        static int findDigitSum(int num1, int num2)
+        static Boolean isPrime(long a)
         {
-            var product = new BigInteger(1);
-            for (int i = 1; i <= num2; i++)
+            if (a < 2)
+                return false;
+            if (a % 2 == 0 && a != 2)
+                return false;
+            for (int i = 3; i <= Math.Sqrt(a); i += 2)
             {
-                product *= num1;
+                if (a % i == 0)
+                {
+                    return false;
+                }
             }
-            int digits = 0;
-            while (product!=0)
-            {
-                digits += int.Parse((product % 10).ToString());
-                product = product / 10;
-            }
-            return digits;
+            return true;
         }
     }
 }
