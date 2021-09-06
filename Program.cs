@@ -11,52 +11,42 @@ namespace ProjectEuler.Net
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(findHighestConsecutivePrimeSum(1000000));
+           findPrimePermutation();
         }
 
-        static List<int> primes = new List<int>();
-
-        static int findHighestConsecutivePrimeSum(int high)
+        static void findPrimePermutation()
         {
-            int largest = 0;
-            int largestP = 0;
-            for (int i = 2; i<= high; i++)
+            for (int i = 1001; i<9999; i+=2)
             {
                 if (isPrime(i))
                 {
-                    primes.Add(i);
-                    if (findConsecutivePrime(i, largest) > largest)
+                    for (int j = 2; j <=5000; j +=2)
                     {
-                        largest = findConsecutivePrime(i, largest);
-                        largestP = i;
-                        Console.WriteLine(largestP + ", " + largest);
+                        int b = i + j;
+                        int c = i + 2 * j;
+                        if (isPrime(b) && isPrime(c) && arePermutations(i,b,c))
+                        {
+                            Console.WriteLine(i + ","+b+","+c);
+                        }
                     }
                 }
             }
-            return largestP;
         }
 
-        static int findConsecutivePrime(int prime, int largest)
+        static bool arePermutations(int a, int b, int c)
         {
-            int pos = primes.IndexOf(prime) - largest;
-            int n = 0;
-            int sum = 0;
-            while (n < pos)
+            if (c>9999)
+                return false;
+            string num1 = ""+a,num2 = ""+b, num3 = ""+c;
+            for (int i = 0; i<=9;i++)
             {
-                for (int i = n; i<=pos; i++)
-                {
-                    sum += primes[i];
-                    if (sum > prime)
-                    {
-                        break;
-                    }
-                    else if (sum == prime)
-                        return i - n+1;
-                }
-                sum = 0;
-                n++;
+                num1= num1.Replace(i.ToString(), "");
+                num2= num2.Replace(i.ToString(), "");
+                num3= num3.Replace(i.ToString(), "");
+                if (num1.Length != num2.Length || num2.Length != num3.Length)
+                    return false;
             }
-            return 0;
+            return true;
         }
         static Boolean isPrime(long a)
         {
