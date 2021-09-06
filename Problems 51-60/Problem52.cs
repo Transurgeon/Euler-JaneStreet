@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections;
-using System.Numerics;
-using System.IO;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text;
 
-namespace ProjectEuler.Net
+namespace ProjectEuler.Net.Remaining_5
 {
-    class Program
+    class Problem52
     {
-        static void Main(string[] args)
+        /*         static void Main(string[] args)
         {
            Console.WriteLine(findPermutedMultiples());
         }
@@ -45,11 +42,6 @@ namespace ProjectEuler.Net
                     return false;
             }
             return true;
-        }
+        }*/
     }
 }
-
-
-    
-
-
