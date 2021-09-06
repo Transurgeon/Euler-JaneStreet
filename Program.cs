@@ -11,43 +11,21 @@ namespace ProjectEuler.Net
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(findCombinatoricSelections(1000000));
-            //Console.WriteLine(isCombinatoricGreater(23, 10, 1000000));
+            Console.WriteLine(findVeryLargeNon_Mersenne(28433,7830457));
         }
 
-        static int findCombinatoricSelections(int max)
+        static long findVeryLargeNon_Mersenne(int product, int power)
         {
-            int count = 0;
-            for (int i = 22; i<= 100; i++)
+            long num = 1;
+            for (int i = 0; i < power;i++)
             {
-                for (int j = 1; j<= i; j++)
-                {
-                    if (isCombinatoricGreater(i,j,max))
-                    {
-                        Console.WriteLine(i + "," + j);
-                        count++;
-                    }
-                }
+                num *= 2;
+                num = num % 10000000000;
             }
-            return count;
-        }
-        static bool isCombinatoricGreater(int i, int j, int max)
-        {
-
-            if (getFactorial(i) / (getFactorial(j) * getFactorial(i - j)) > max) {
-                Console.WriteLine(getFactorial(i) / (getFactorial(j) * getFactorial(i - j)));
-                return true;
-            }
-            return false;
-        }
-        static BigInteger getFactorial(int num)
-        {
-            var product = new BigInteger(1);
-            for (int i = num; i >= 2; i--)
-            {
-                product *= i;
-            }
-            return product;
+            num *= product;
+            num = num % 10000000000;
+            num++;
+            return num;
         }
     }
 }
