@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections;
-using System.Numerics;
-using System.IO;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text;
 
-namespace ProjectEuler.Net
+namespace ProjectEuler.Net.Problems_51_60
 {
-    class Program
+    class Problem53
     {
-        static void Main(string[] args)
+        /*        static void Main(string[] args)
         {
             Console.WriteLine(findCombinatoricSelections(1000000));
             //Console.WriteLine(isCombinatoricGreater(23, 10, 1000000));
@@ -48,11 +45,6 @@ namespace ProjectEuler.Net
                 product *= i;
             }
             return product;
-        }
+        } */
     }
 }
-
-
-    
-
-
