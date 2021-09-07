@@ -11,27 +11,52 @@ namespace ProjectEuler.Net
     {
         static void Main(string[] args)
         {
-            findPowerfulCount();
+            Console.WriteLine(findLychrelNumbers(10000));
         }
-        static void findPowerfulCount()
+
+        static int findLychrelNumbers(int high)
         {
-            int count = 0;
-            for (int i = 0; i<25;i++)
+            int countLychrel = 0; 
+            for (int i = 1; i<high; i++)
             {
-                int n = 1;
-                while (true)
+                int iterations = 0;
+                var n = new BigInteger(i);
+                while (iterations < 50)
                 {
-                    if (Math.Pow(n, i + 1) >= Math.Pow(10, i + 1))
-                        break;
-                    else if (Math.Pow(n, i + 1) >= Math.Pow(10, i))
+                    if (!isPalyndrome(n + getReverse(n)))
                     {
-                        Console.WriteLine(Math.Pow(n, i + 1));
-                        count++;
+                        n = n + getReverse(n);
+                        iterations++;
                     }
-                    n++;
+                    else break;
+                    if (iterations == 49)
+                        countLychrel++;
+                   
                 }
             }
-            Console.WriteLine(count);
+            return countLychrel;
+        }
+        static Boolean isPalyndrome(BigInteger a)
+        {
+            String reverse = "";
+            String num = a.ToString();
+            for (int i = num.Length - 1; i >= 0; i--)
+            {
+                reverse += num[i];
+            }
+            if (reverse.Equals(num))
+                return true;
+            return false;
+        }
+        static BigInteger getReverse(BigInteger a)
+        {
+            String reverse = "";
+            String num = a.ToString();
+            for (int i = num.Length - 1; i >= 0; i--)
+            {
+                reverse += num[i];
+            }
+            return BigInteger.Parse(reverse);
         }
     }
 }
