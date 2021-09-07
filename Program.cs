@@ -11,49 +11,27 @@ namespace ProjectEuler.Net
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(findPrimeSpiralUnder10());
+            findPowerfulCount();
         }
-        static int findPrimeSpiralUnder10()
-        {   
-            double length = findPrimeDiagonalSpiral(3,0,1,2,1);
-            return (int)length;
-        }
-        static double findPrimeDiagonalSpiral(int grid,int primeCount, int diagCount, int skip, int a)
+        static void findPowerfulCount()
         {
-            while (true)
-            {                
-                Console.WriteLine(grid + "," + primeCount + "," + diagCount + "," + skip + "," + a);
-
-                for (int i = 0; i < 4; i++)
-                {
-                    a += skip;
-                    if (isPrime(a))
-                    {
-                        primeCount++;
-                    }
-                }
-
-                diagCount += 4; 
-                if (((double)primeCount / diagCount) < 0.1000000)
-                    return grid; 
-                grid += 2;
-                skip += 2;
-            }
-        }
-        static Boolean isPrime(long a)
-        {
-            if (a < 2)
-                return false;
-            if (a % 2 == 0 && a != 2)
-                return false;
-            for (int i = 3; i <= Math.Sqrt(a); i += 2)
+            int count = 0;
+            for (int i = 0; i<25;i++)
             {
-                if (a % i == 0)
+                int n = 1;
+                while (true)
                 {
-                    return false;
+                    if (Math.Pow(n, i + 1) >= Math.Pow(10, i + 1))
+                        break;
+                    else if (Math.Pow(n, i + 1) >= Math.Pow(10, i))
+                    {
+                        Console.WriteLine(Math.Pow(n, i + 1));
+                        count++;
+                    }
+                    n++;
                 }
             }
-            return true;
+            Console.WriteLine(count);
         }
     }
 }
