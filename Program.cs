@@ -11,52 +11,23 @@ namespace ProjectEuler.Net
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(findLychrelNumbers(10000));
+            Console.WriteLine(findSquareRootConvergence(1000));
         }
-
-        static int findLychrelNumbers(int high)
+        static int findSquareRootConvergence(int iterations)
         {
-            int countLychrel = 0; 
-            for (int i = 1; i<high; i++)
+            int count = 0;
+            BigInteger numerator = 3;
+            BigInteger denominator = 2;
+            for (int i = 0; i<iterations;i++)
             {
-                int iterations = 0;
-                var n = new BigInteger(i);
-                while (iterations < 50)
-                {
-                    if (!isPalyndrome(n + getReverse(n)))
-                    {
-                        n = n + getReverse(n);
-                        iterations++;
-                    }
-                    else break;
-                    if (iterations == 49)
-                        countLychrel++;
-                   
-                }
+                if (numerator.ToString().Length > denominator.ToString().Length)
+                    count++;
+                BigInteger temp1 = numerator;
+                numerator += 2 * denominator;
+                denominator += temp1;
+                Console.WriteLine(numerator + "," + denominator);
             }
-            return countLychrel;
-        }
-        static Boolean isPalyndrome(BigInteger a)
-        {
-            String reverse = "";
-            String num = a.ToString();
-            for (int i = num.Length - 1; i >= 0; i--)
-            {
-                reverse += num[i];
-            }
-            if (reverse.Equals(num))
-                return true;
-            return false;
-        }
-        static BigInteger getReverse(BigInteger a)
-        {
-            String reverse = "";
-            String num = a.ToString();
-            for (int i = num.Length - 1; i >= 0; i--)
-            {
-                reverse += num[i];
-            }
-            return BigInteger.Parse(reverse);
+            return count;
         }
     }
 }
