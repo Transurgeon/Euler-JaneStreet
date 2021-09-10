@@ -11,23 +11,35 @@ namespace ProjectEuler.Net
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(findSquareRootConvergence(1000));
+            Console.WriteLine(findSquareDigitChains(10000000));
         }
-        static int findSquareRootConvergence(int iterations)
+
+        static int findSquareDigitChains(int high)
         {
             int count = 0;
-            BigInteger numerator = 3;
-            BigInteger denominator = 2;
-            for (int i = 0; i<iterations;i++)
+            for (int i = 1; i<=high;i++)
             {
-                if (numerator.ToString().Length > denominator.ToString().Length)
+                int num = i;
+                while (true)
+                {
+                    num = getSquareDigit(num);
+                    if (num == 89 || num == 1)
+                        break;
+                }
+                if (num == 89)
                     count++;
-                BigInteger temp1 = numerator;
-                numerator += 2 * denominator;
-                denominator += temp1;
-                Console.WriteLine(numerator + "," + denominator);
             }
             return count;
+        }
+        static int getSquareDigit(int num)
+        {
+            int squareSum = 0;
+            while (num!=0)
+            {
+                squareSum += (int)Math.Pow(num%10,2);
+                num = num / 10; 
+            }
+            return squareSum;
         }
     }
 }
