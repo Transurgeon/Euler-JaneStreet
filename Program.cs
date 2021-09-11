@@ -11,38 +11,43 @@ namespace ProjectEuler.Net
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(findSquareDigitChains(10000000));
+            Console.WriteLine(findNumberSplitting(4));
+            //Console.WriteLine(isNumberSplittable(99));
+        }
+        static long findNumberSplitting(int power)
+        {
+            long sum = 0;
+            for (long i = 4; i<= Math.Pow(10,power); i++)
+            {
+                if (isNumberSplittable(i))
+                {
+                    Console.WriteLine(i + "," + i*i);
+                    sum += i * i;
+                }
+            }
+            return sum;
+        }
+        static bool isNumberSplittable(long root)
+        {
+            return isNumberSplittable(root, (root * root).ToString(), 0);
         }
 
-        static int findSquareDigitChains(int high)
+        static bool isNumberSplittable(long root, string num, long runningSum)
         {
-            int count = 0;
-            for (int i = 1; i<=high;i++)
+            int i = 1;
+            while (i<= num.ToString().Length && i<= num.Length)
             {
-                int num = i;
-                while (true)
-                {
-                    num = getSquareDigit(num);
-                    if (num == 89 || num == 1)
-                        break;
-                }
-                if (num == 89)
-                    count++;
+                if(isNumberSplittable(root,num.Substring(i),long.Parse(num.Substring(0,i))+runningSum))
+                    return true;
+                i++;
             }
-            return count;
-        }
-        static int getSquareDigit(int num)
-        {
-            int squareSum = 0;
-            while (num!=0)
-            {
-                squareSum += (int)Math.Pow(num%10,2);
-                num = num / 10; 
-            }
-            return squareSum;
+            if (num.Length == 0 && root == runningSum)
+                return true;
+            return false;
         }
     }
 }
+
 
 
     
