@@ -15,50 +15,103 @@ namespace ProjectEuler.Net
             var watch = new System.Diagnostics.Stopwatch();
 
             watch.Start();
-            Console.WriteLine(findNumberSplitting(6));
-            //Console.WriteLine(isNumberSplittable(99));
+            // we multiply by 10 because any number squared that ends in 0 is a multiple of 10
+            Console.WriteLine(getConcealedSquare()*10); 
             watch.Stop();
 
             Console.WriteLine($"Execution Time: {watch.ElapsedMilliseconds} ms");
-        }
-        static long findNumberSplitting(int power)
-        {
-            long sum = 0;
-            for (long i = 4; i <= Math.Pow(10, power); i++)
+            foreach (long c in perm)
             {
-                if (isNumberSplittable(i))
+                Console.WriteLine(c);
+            }
+        }
+        static BigInteger getConcealedSquare()
+        {
+            var root = new BigInteger(138902663); //sqrt of max possible number (19293949596979899)
+            while (true)
+            {
+                var square = new BigInteger((root * root).ToByteArray());
+                Console.WriteLine(square);
+                bool cond = true;
+                for (int i = 0; i<9; i++)
                 {
-                    Console.WriteLine(i + "," + i * i);
-                    sum += i * i;
+                    if (square.ToString().Substring(2 * i, 1) != (i + 1).ToString())
+                        cond = false;
+                }
+                if (cond == true)
+                    return root;
+                root -= 2; // we skip all even numbers because to get 9 from squaring n : n can only be 3,7
+            }
+        }
+        static bool findConcealedSquare(String concat2)
+        {
+            Console.WriteLine(concat2);
+            string concat1 = "1234567890";
+            string numero = "";
+            for (int i = 0; i < Math.Max(concat1.Length,concat2.Length); i++)
+            {
+                if (i < concat1.Length)
+                {
+                    numero+=concat1[i];
+                }
+                if (i < concat2.Length)
+                {
+                    numero+=concat2[i];
                 }
             }
-            return sum;
-        }
-        static bool isNumberSplittable(long root)
-        {
-            if (root * root % 9 > 1)
-                return false;
-            return isNumberSplittable(root, (root * root).ToString(), 0);
-        }
-
-        static bool isNumberSplittable(long root, string num, long runningSum)
-        {
-            int i = 1;
-            while (i <= num.ToString().Length && i <= num.Length)
+            var num = BigInteger.Parse(numero);
+            Console.WriteLine(numero);
+            if (checkPerfectSquare(num, 1, num) != -1)
             {
-                if (isNumberSplittable(root, num.Substring(i), long.Parse(num.Substring(0, i)) + runningSum))
-                    return true;
-                i++;
-            }
-            if (num.Length == 0 && root == runningSum)
                 return true;
+            }
             return false;
         }
+        public static BigInteger checkPerfectSquare(BigInteger N,
+                                             BigInteger start,
+                                             BigInteger last)
+        {
+            BigInteger mid = (start + last) / 2;
+
+            if (start > last)
+            {
+                return -1;
+            }
+            if (mid * mid == N)
+            {
+                return mid;
+            }
+            else if (mid * mid > N)
+            {
+                return checkPerfectSquare(N, start,
+                                          mid - 1);
+            }
+            else
+            {
+                return checkPerfectSquare(N, mid + 1,
+                                          last);
+            }
+        }
+
+        static int[] digits = new int[] { 9,8,7,6,5,4,3,2,1,0};
+        static List<long> perm = new List<long>();
+        static void Rec(int current, int numDigits)
+        {
+            if (numDigits == 0)
+            {
+                if (findConcealedSquare(current.ToString().PadLeft(9, '0')))
+                perm.Add(long.Parse(current.ToString()));
+            }
+            else
+                foreach (int x in digits)
+                    Rec(current * 10 + x, numDigits - 1);
+        }
+
     }
 }
 
 
 
-    
+
 
 
