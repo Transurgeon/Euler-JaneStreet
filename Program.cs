@@ -27,6 +27,7 @@ namespace ProjectEuler.Net
             //comment out till here if no need :)
             watch.Start();
 
+
             watch.Stop();
 
             Console.WriteLine($"Execution Time: {watch.ElapsedMilliseconds} ms");
