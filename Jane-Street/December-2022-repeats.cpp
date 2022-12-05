@@ -69,8 +69,8 @@ void depthSearch(int start_x, int start_y, int grid[6][6], visitedstate visited)
     int iterations = 1;
     std::vector<int> dice_values;
 
-    std::vector < visitedstate > timeseries;
-    timeseries.push_back(visited);
+    //std::vector < visitedstate > timeseries;
+    //timeseries.push_back(visited);
 
     // traverse the array whilst the stack isn't empty
     while (!st.empty())
@@ -83,13 +83,13 @@ void depthSearch(int start_x, int start_y, int grid[6][6], visitedstate visited)
         
         std::cout << "The search is currently on square with value: " << grid[row][col] << "\n";
         
-        visitedstate copy = timeseries.back();
-        timeseries.pop_back();
+        //visitedstate copy = timeseries.back();
+        //timeseries.pop_back();
 
-        copy[row][col] = true;
+        visited[row][col] = true;
 
         std::cout << "The grid currently looks like this: \n";
-        printGrid(grid, copy, 6);
+        printGrid(grid, visited, 6);
 
         iterations = iter.top();
         iter.pop();
@@ -108,16 +108,15 @@ void depthSearch(int start_x, int start_y, int grid[6][6], visitedstate visited)
         {
             std::pair<int, int> valid = adj.top();
             
-            if (copy[valid.first][valid.second] == false) {
+            //if (copy[valid.first][valid.second] == false) {
                 st.push(valid);
                 std::cout << "The square with value: " << grid[valid.first][valid.second] << " is congruent with: " << grid[row][col]
                     << " on iterations: " << iterations << "\n";
                 iter.push(iterations+1);
                 std::cout << "Pushing the following value to the iter stack: " << iterations+1 << "\n";
-                timeseries.push_back(copy);
                 dice_values.push_back((grid[valid.first][valid.second] - grid[row][col]) / iterations);
                 validPath = true;
-            }
+            //}
             adj.pop();
         }
         if (!validPath) {

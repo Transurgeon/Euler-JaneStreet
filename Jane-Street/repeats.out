@@ -1,0 +1,481 @@
+0	77	32	403	337	452	
+5	23	-4	592	445	620	
+-7	2	357	452	317	395	
+186	42	195	704	452	228	
+81	123	240	443	353	508	
+57	33	132	268	492	732	
+The search is currently on square with value: 0
+The grid currently looks like this: 
+v 	77	32	403	337	452	
+5	23	-4	592	445	620	
+-7	2	357	452	317	395	
+186	42	195	704	452	228	
+81	123	240	443	353	508	
+57	33	132	268	492	732	
+The current iteration value is: 1
+The square with value: 5 is congruent with: 0 on iterations: 1
+Pushing the following value to the iter stack: 2
+The square with value: 77 is congruent with: 0 on iterations: 1
+Pushing the following value to the iter stack: 2
+The search is currently on square with value: 77
+The grid currently looks like this: 
+v 	v 	32	403	337	452	
+5	23	-4	592	445	620	
+-7	2	357	452	317	395	
+186	42	195	704	452	228	
+81	123	240	443	353	508	
+57	33	132	268	492	732	
+The current iteration value is: 2
+The square with value: 23 is congruent with: 77 on iterations: 2
+Pushing the following value to the iter stack: 3
+The search is currently on square with value: 23
+The grid currently looks like this: 
+v 	v 	32	403	337	452	
+5	v 	-4	592	445	620	
+-7	2	357	452	317	395	
+186	42	195	704	452	228	
+81	123	240	443	353	508	
+57	33	132	268	492	732	
+The current iteration value is: 3
+The square with value: 2 is congruent with: 23 on iterations: 3
+Pushing the following value to the iter stack: 4
+The square with value: -4 is congruent with: 23 on iterations: 3
+Pushing the following value to the iter stack: 4
+The square with value: 77 is congruent with: 23 on iterations: 3
+Pushing the following value to the iter stack: 4
+The square with value: 5 is congruent with: 23 on iterations: 3
+Pushing the following value to the iter stack: 4
+The search is currently on square with value: 5
+The grid currently looks like this: 
+v 	v 	32	403	337	452	
+v 	v 	-4	592	445	620	
+-7	2	357	452	317	395	
+186	42	195	704	452	228	
+81	123	240	443	353	508	
+57	33	132	268	492	732	
+The current iteration value is: 4
+The square with value: -7 is congruent with: 5 on iterations: 4
+Pushing the following value to the iter stack: 5
+The search is currently on square with value: -7
+The grid currently looks like this: 
+v 	v 	32	403	337	452	
+v 	v 	-4	592	445	620	
+v 	2	357	452	317	395	
+186	42	195	704	452	228	
+81	123	240	443	353	508	
+57	33	132	268	492	732	
+The current iteration value is: 5
+The path reached a dead-end and cannot continue, we must backtrack
+------------------------------------------------------------------
+The search is currently on square with value: 77
+The grid currently looks like this: 
+v 	v 	32	403	337	452	
+v 	v 	-4	592	445	620	
+v 	2	357	452	317	395	
+186	42	195	704	452	228	
+81	123	240	443	353	508	
+57	33	132	268	492	732	
+The current iteration value is: 4
+The path reached a dead-end and cannot continue, we must backtrack
+------------------------------------------------------------------
+The search is currently on square with value: -4
+The grid currently looks like this: 
+v 	v 	32	403	337	452	
+v 	v 	v 	592	445	620	
+v 	2	357	452	317	395	
+186	42	195	704	452	228	
+81	123	240	443	353	508	
+57	33	132	268	492	732	
+The current iteration value is: 4
+The square with value: 592 is congruent with: -4 on iterations: 4
+Pushing the following value to the iter stack: 5
+The square with value: 32 is congruent with: -4 on iterations: 4
+Pushing the following value to the iter stack: 5
+The search is currently on square with value: 32
+The grid currently looks like this: 
+v 	v 	v 	403	337	452	
+v 	v 	v 	592	445	620	
+v 	2	357	452	317	395	
+186	42	195	704	452	228	
+81	123	240	443	353	508	
+57	33	132	268	492	732	
+The current iteration value is: 5
+The square with value: 77 is congruent with: 32 on iterations: 5
+Pushing the following value to the iter stack: 6
+The search is currently on square with value: 77
+The grid currently looks like this: 
+v 	v 	v 	403	337	452	
+v 	v 	v 	592	445	620	
+v 	2	357	452	317	395	
+186	42	195	704	452	228	
+81	123	240	443	353	508	
+57	33	132	268	492	732	
+The current iteration value is: 6
+The square with value: 23 is congruent with: 77 on iterations: 6
+Pushing the following value to the iter stack: 7
+The search is currently on square with value: 23
+The grid currently looks like this: 
+v 	v 	v 	403	337	452	
+v 	v 	v 	592	445	620	
+v 	2	357	452	317	395	
+186	42	195	704	452	228	
+81	123	240	443	353	508	
+57	33	132	268	492	732	
+The current iteration value is: 7
+The square with value: 2 is congruent with: 23 on iterations: 7
+Pushing the following value to the iter stack: 8
+The search is currently on square with value: 2
+The grid currently looks like this: 
+v 	v 	v 	403	337	452	
+v 	v 	v 	592	445	620	
+v 	v 	357	452	317	395	
+186	42	195	704	452	228	
+81	123	240	443	353	508	
+57	33	132	268	492	732	
+The current iteration value is: 8
+The square with value: 42 is congruent with: 2 on iterations: 8
+Pushing the following value to the iter stack: 9
+The search is currently on square with value: 42
+The grid currently looks like this: 
+v 	v 	v 	403	337	452	
+v 	v 	v 	592	445	620	
+v 	v 	357	452	317	395	
+186	v 	195	704	452	228	
+81	123	240	443	353	508	
+57	33	132	268	492	732	
+The current iteration value is: 9
+The square with value: 123 is congruent with: 42 on iterations: 9
+Pushing the following value to the iter stack: 10
+The square with value: 195 is congruent with: 42 on iterations: 9
+Pushing the following value to the iter stack: 10
+The square with value: 186 is congruent with: 42 on iterations: 9
+Pushing the following value to the iter stack: 10
+The search is currently on square with value: 186
+The grid currently looks like this: 
+v 	v 	v 	403	337	452	
+v 	v 	v 	592	445	620	
+v 	v 	357	452	317	395	
+v 	v 	195	704	452	228	
+81	123	240	443	353	508	
+57	33	132	268	492	732	
+The current iteration value is: 10
+The path reached a dead-end and cannot continue, we must backtrack
+------------------------------------------------------------------
+The search is currently on square with value: 195
+The grid currently looks like this: 
+v 	v 	v 	403	337	452	
+v 	v 	v 	592	445	620	
+v 	v 	357	452	317	395	
+v 	v 	v 	704	452	228	
+81	123	240	443	353	508	
+57	33	132	268	492	732	
+The current iteration value is: 10
+The path reached a dead-end and cannot continue, we must backtrack
+------------------------------------------------------------------
+The search is currently on square with value: 123
+The grid currently looks like this: 
+v 	v 	v 	403	337	452	
+v 	v 	v 	592	445	620	
+v 	v 	357	452	317	395	
+v 	v 	v 	704	452	228	
+81	v 	240	443	353	508	
+57	33	132	268	492	732	
+The current iteration value is: 10
+The square with value: 33 is congruent with: 123 on iterations: 10
+Pushing the following value to the iter stack: 11
+The search is currently on square with value: 33
+The grid currently looks like this: 
+v 	v 	v 	403	337	452	
+v 	v 	v 	592	445	620	
+v 	v 	357	452	317	395	
+v 	v 	v 	704	452	228	
+81	v 	240	443	353	508	
+57	v 	132	268	492	732	
+The current iteration value is: 11
+The square with value: 132 is congruent with: 33 on iterations: 11
+Pushing the following value to the iter stack: 12
+The search is currently on square with value: 132
+The grid currently looks like this: 
+v 	v 	v 	403	337	452	
+v 	v 	v 	592	445	620	
+v 	v 	357	452	317	395	
+v 	v 	v 	704	452	228	
+81	v 	240	443	353	508	
+57	v 	v 	268	492	732	
+The current iteration value is: 12
+The square with value: 240 is congruent with: 132 on iterations: 12
+Pushing the following value to the iter stack: 13
+The search is currently on square with value: 240
+The grid currently looks like this: 
+v 	v 	v 	403	337	452	
+v 	v 	v 	592	445	620	
+v 	v 	357	452	317	395	
+v 	v 	v 	704	452	228	
+81	v 	v 	443	353	508	
+57	v 	v 	268	492	732	
+The current iteration value is: 13
+The square with value: 123 is congruent with: 240 on iterations: 13
+Pushing the following value to the iter stack: 14
+The search is currently on square with value: 123
+The grid currently looks like this: 
+v 	v 	v 	403	337	452	
+v 	v 	v 	592	445	620	
+v 	v 	357	452	317	395	
+v 	v 	v 	704	452	228	
+81	v 	v 	443	353	508	
+57	v 	v 	268	492	732	
+The current iteration value is: 14
+The square with value: 81 is congruent with: 123 on iterations: 14
+Pushing the following value to the iter stack: 15
+The search is currently on square with value: 81
+The grid currently looks like this: 
+v 	v 	v 	403	337	452	
+v 	v 	v 	592	445	620	
+v 	v 	357	452	317	395	
+v 	v 	v 	704	452	228	
+v 	v 	v 	443	353	508	
+57	v 	v 	268	492	732	
+The current iteration value is: 15
+The square with value: 186 is congruent with: 81 on iterations: 15
+Pushing the following value to the iter stack: 16
+The search is currently on square with value: 186
+The grid currently looks like this: 
+v 	v 	v 	403	337	452	
+v 	v 	v 	592	445	620	
+v 	v 	357	452	317	395	
+v 	v 	v 	704	452	228	
+v 	v 	v 	443	353	508	
+57	v 	v 	268	492	732	
+The current iteration value is: 16
+The square with value: 42 is congruent with: 186 on iterations: 16
+Pushing the following value to the iter stack: 17
+The search is currently on square with value: 42
+The grid currently looks like this: 
+v 	v 	v 	403	337	452	
+v 	v 	v 	592	445	620	
+v 	v 	357	452	317	395	
+v 	v 	v 	704	452	228	
+v 	v 	v 	443	353	508	
+57	v 	v 	268	492	732	
+The current iteration value is: 17
+The square with value: 195 is congruent with: 42 on iterations: 17
+Pushing the following value to the iter stack: 18
+The search is currently on square with value: 195
+The grid currently looks like this: 
+v 	v 	v 	403	337	452	
+v 	v 	v 	592	445	620	
+v 	v 	357	452	317	395	
+v 	v 	v 	704	452	228	
+v 	v 	v 	443	353	508	
+57	v 	v 	268	492	732	
+The current iteration value is: 18
+The square with value: 357 is congruent with: 195 on iterations: 18
+Pushing the following value to the iter stack: 19
+The search is currently on square with value: 357
+The grid currently looks like this: 
+v 	v 	v 	403	337	452	
+v 	v 	v 	592	445	620	
+v 	v 	v 	452	317	395	
+v 	v 	v 	704	452	228	
+v 	v 	v 	443	353	508	
+57	v 	v 	268	492	732	
+The current iteration value is: 19
+The square with value: 452 is congruent with: 357 on iterations: 19
+Pushing the following value to the iter stack: 20
+The square with value: -4 is congruent with: 357 on iterations: 19
+Pushing the following value to the iter stack: 20
+The search is currently on square with value: -4
+The grid currently looks like this: 
+v 	v 	v 	403	337	452	
+v 	v 	v 	592	445	620	
+v 	v 	v 	452	317	395	
+v 	v 	v 	704	452	228	
+v 	v 	v 	443	353	508	
+57	v 	v 	268	492	732	
+The current iteration value is: 20
+The path reached a dead-end and cannot continue, we must backtrack
+------------------------------------------------------------------
+The search is currently on square with value: 452
+The grid currently looks like this: 
+v 	v 	v 	403	337	452	
+v 	v 	v 	592	445	620	
+v 	v 	v 	v 	317	395	
+v 	v 	v 	704	452	228	
+v 	v 	v 	443	353	508	
+57	v 	v 	268	492	732	
+The current iteration value is: 20
+The square with value: 592 is congruent with: 452 on iterations: 20
+Pushing the following value to the iter stack: 21
+The search is currently on square with value: 592
+The grid currently looks like this: 
+v 	v 	v 	403	337	452	
+v 	v 	v 	v 	445	620	
+v 	v 	v 	v 	317	395	
+v 	v 	v 	704	452	228	
+v 	v 	v 	443	353	508	
+57	v 	v 	268	492	732	
+The current iteration value is: 21
+The square with value: 445 is congruent with: 592 on iterations: 21
+Pushing the following value to the iter stack: 22
+The square with value: 403 is congruent with: 592 on iterations: 21
+Pushing the following value to the iter stack: 22
+The search is currently on square with value: 403
+The grid currently looks like this: 
+v 	v 	v 	v 	337	452	
+v 	v 	v 	v 	445	620	
+v 	v 	v 	v 	317	395	
+v 	v 	v 	704	452	228	
+v 	v 	v 	443	353	508	
+57	v 	v 	268	492	732	
+The current iteration value is: 22
+The square with value: 337 is congruent with: 403 on iterations: 22
+Pushing the following value to the iter stack: 23
+The search is currently on square with value: 337
+The grid currently looks like this: 
+v 	v 	v 	v 	v 	452	
+v 	v 	v 	v 	445	620	
+v 	v 	v 	v 	317	395	
+v 	v 	v 	704	452	228	
+v 	v 	v 	443	353	508	
+57	v 	v 	268	492	732	
+The current iteration value is: 23
+The square with value: 452 is congruent with: 337 on iterations: 23
+Pushing the following value to the iter stack: 24
+The search is currently on square with value: 452
+The grid currently looks like this: 
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	445	620	
+v 	v 	v 	v 	317	395	
+v 	v 	v 	704	452	228	
+v 	v 	v 	443	353	508	
+57	v 	v 	268	492	732	
+The current iteration value is: 24
+The square with value: 620 is congruent with: 452 on iterations: 24
+Pushing the following value to the iter stack: 25
+The search is currently on square with value: 620
+The grid currently looks like this: 
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	445	v 	
+v 	v 	v 	v 	317	395	
+v 	v 	v 	704	452	228	
+v 	v 	v 	443	353	508	
+57	v 	v 	268	492	732	
+The current iteration value is: 25
+The square with value: 395 is congruent with: 620 on iterations: 25
+Pushing the following value to the iter stack: 26
+The square with value: 445 is congruent with: 620 on iterations: 25
+Pushing the following value to the iter stack: 26
+The search is currently on square with value: 445
+The grid currently looks like this: 
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	317	395	
+v 	v 	v 	704	452	228	
+v 	v 	v 	443	353	508	
+57	v 	v 	268	492	732	
+The current iteration value is: 26
+The path reached a dead-end and cannot continue, we must backtrack
+------------------------------------------------------------------
+The search is currently on square with value: 395
+The grid currently looks like this: 
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	317	v 	
+v 	v 	v 	704	452	228	
+v 	v 	v 	443	353	508	
+57	v 	v 	268	492	732	
+The current iteration value is: 26
+The square with value: 317 is congruent with: 395 on iterations: 26
+Pushing the following value to the iter stack: 27
+The search is currently on square with value: 317
+The grid currently looks like this: 
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	704	452	228	
+v 	v 	v 	443	353	508	
+57	v 	v 	268	492	732	
+The current iteration value is: 27
+The square with value: 452 is congruent with: 317 on iterations: 27
+Pushing the following value to the iter stack: 28
+The square with value: 452 is congruent with: 317 on iterations: 27
+Pushing the following value to the iter stack: 28
+The search is currently on square with value: 452
+The grid currently looks like this: 
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	704	452	228	
+v 	v 	v 	443	353	508	
+57	v 	v 	268	492	732	
+The current iteration value is: 28
+The square with value: 704 is congruent with: 452 on iterations: 28
+Pushing the following value to the iter stack: 29
+The square with value: 592 is congruent with: 452 on iterations: 28
+Pushing the following value to the iter stack: 29
+The search is currently on square with value: 592
+The grid currently looks like this: 
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	704	452	228	
+v 	v 	v 	443	353	508	
+57	v 	v 	268	492	732	
+The current iteration value is: 29
+The path reached a dead-end and cannot continue, we must backtrack
+------------------------------------------------------------------
+The search is currently on square with value: 704
+The grid currently looks like this: 
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	452	228	
+v 	v 	v 	443	353	508	
+57	v 	v 	268	492	732	
+The current iteration value is: 29
+The square with value: 443 is congruent with: 704 on iterations: 29
+Pushing the following value to the iter stack: 30
+The search is currently on square with value: 443
+The grid currently looks like this: 
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	452	228	
+v 	v 	v 	v 	353	508	
+57	v 	v 	268	492	732	
+The current iteration value is: 30
+The square with value: 353 is congruent with: 443 on iterations: 30
+Pushing the following value to the iter stack: 31
+The search is currently on square with value: 353
+The grid currently looks like this: 
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	452	228	
+v 	v 	v 	v 	v 	508	
+57	v 	v 	268	492	732	
+The current iteration value is: 31
+The square with value: 508 is congruent with: 353 on iterations: 31
+Pushing the following value to the iter stack: 32
+The search is currently on square with value: 508
+The grid currently looks like this: 
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	452	228	
+v 	v 	v 	v 	v 	v 	
+57	v 	v 	268	492	732	
+The current iteration value is: 32
+The square with value: 732 is congruent with: 508 on iterations: 32
+Pushing the following value to the iter stack: 33
+The search is currently on square with value: 732
+The grid currently looks like this: 
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	v 	v 	
+v 	v 	v 	v 	452	228	
+v 	v 	v 	v 	v 	v 	
+57	v 	v 	268	492	v 	
+The current iteration value is: 33
+We have reached our desired goal of the upper right blue corner
+dice_values = { 5, 77, -27, -7, -9, 18, -6, -3, 149, 9, 9, -9, -3, 5, 9, 17, 16, -9, 9, 9, -9, -3, 7, -9, 9, 9, 5, -19, 7, -7, -9, -3, 5, 7, -9, -7, -3, 5, 5, 9, 5, -9, -3, 5, 7, }; 
