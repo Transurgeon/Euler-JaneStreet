@@ -8,7 +8,10 @@
 using namespace std;
 
 typedef std::array<std::array<bool, 6>, 6> visitedstate;
-
+typedef std::vector<int> dices;
+/*
+Simple function that prints the current state of a grid
+*/
 void printGrid(int grid[6][6], visitedstate visited, int length)
 {
     for (int i = 0; i < length; i++)
@@ -23,12 +26,17 @@ void printGrid(int grid[6][6], visitedstate visited, int length)
         std::cout << "\n";
     }
 }
-
+/*
+If a number is negative, its modulo value will also be negative. This is not what we want
+We simply change it a bit to always return a positive value.
+*/
 int positive_modulo(int i, int n)
 {
     return ((i % n) + n) % n;
 }
+/*
 
+*/
 bool compare_modulo(int current, int next, int n)
 {   
     int first = current % n;
@@ -39,7 +47,9 @@ bool compare_modulo(int current, int next, int n)
         second = positive_modulo(next, n); 
     return first == second;
 }
+/*
 
+*/
 stack<std::pair<int, int> > getValid_Adjacent_Squares(int row, int col, int grid[6][6], int iterations)
 {
     // initialise stack
@@ -58,7 +68,9 @@ stack<std::pair<int, int> > getValid_Adjacent_Squares(int row, int col, int grid
         adj.push(make_pair(row + 1, col));
     return adj;
 }
+/*
 
+*/
 void depthSearch(int start_x, int start_y, int grid[6][6], visitedstate visited)
 {
     // initialise stack
@@ -67,11 +79,9 @@ void depthSearch(int start_x, int start_y, int grid[6][6], visitedstate visited)
     stack<int> iter;
     iter.push(1);
     int iterations = 1;
-    std::vector<int> dice_values;
-
-    //std::vector < visitedstate > timeseries;
-    //timeseries.push_back(visited);
-
+    std::vector<dices> dice_state;
+    dices init;
+    dice_state.push_back(init);
     // traverse the array whilst the stack isn't empty
     while (!st.empty())
     {
@@ -83,23 +93,22 @@ void depthSearch(int start_x, int start_y, int grid[6][6], visitedstate visited)
         
         std::cout << "The search is currently on square with value: " << grid[row][col] << "\n";
         
-        //visitedstate copy = timeseries.back();
-        //timeseries.pop_back();
-
         visited[row][col] = true;
 
+        dices dice_copy = dice_state.back();
+        dice_state.pop_back();
         std::cout << "The grid currently looks like this: \n";
         printGrid(grid, visited, 6);
 
         iterations = iter.top();
         iter.pop();
 
-        std::cout << "The current iteration value is: " << iterations << "\n";
-
         if (grid[row][col] == 732) {
             std::cout << "We have reached our desired goal of the upper right blue corner\n";
             break;
         }
+
+        std::cout << "The current iteration value is: " << iterations << "\n";
 
         stack<std::pair<int, int> > adj = getValid_Adjacent_Squares(row, col, grid, iterations);
         
@@ -107,16 +116,16 @@ void depthSearch(int start_x, int start_y, int grid[6][6], visitedstate visited)
         while (!adj.empty())
         {
             std::pair<int, int> valid = adj.top();
-            
-            //if (copy[valid.first][valid.second] == false) {
-                st.push(valid);
-                std::cout << "The square with value: " << grid[valid.first][valid.second] << " is congruent with: " << grid[row][col]
-                    << " on iterations: " << iterations << "\n";
-                iter.push(iterations+1);
-                std::cout << "Pushing the following value to the iter stack: " << iterations+1 << "\n";
-                dice_values.push_back((grid[valid.first][valid.second] - grid[row][col]) / iterations);
-                validPath = true;
-            //}
+
+            st.push(valid);
+            std::cout << "The square with value: " << grid[valid.first][valid.second] << " is congruent with: " << grid[row][col]
+                << " on iterations: " << iterations << "\n";
+            iter.push(iterations+1);
+            std::cout << "Pushing the following value to the iter stack: " << iterations+1 << "\n";
+            dice_copy.push_back((grid[valid.first][valid.second] - grid[row][col]) / iterations);
+            dice_state.push_back(dice_copy);
+            validPath = true;
+
             adj.pop();
         }
         if (!validPath) {
@@ -125,9 +134,10 @@ void depthSearch(int start_x, int start_y, int grid[6][6], visitedstate visited)
         }
         
     }
-    std::cout << "dice_values = { ";
-        for (int n : dice_values)
-            std::cout << n << ", ";
+    dices dice_values = dice_state.back();
+    std::cout << "final dice_values = { ";
+        for (int i = 0; i < dice_values.size(); i++)
+            std::cout << dice_values.at(i) << ", ";
     std::cout << "}; \n";
 }
 
@@ -144,11 +154,9 @@ int main()
         {57, 33, 132, 268, 492, 732},
     };
 
-    // initialising another array to keep track of visited squares
-    visitedstate visited = {0};
-
     // fill the values in memory of the visited array to false
-    //memset(visited, false, sizeof (visited[0][0] * 36));
+    visitedstate visited = {0};
+    // print the initial grid
     printGrid(grid, visited, 6);
     // call depthSearch function
     depthSearch(0, 0, grid, visited);
