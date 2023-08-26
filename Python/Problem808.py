@@ -18,13 +18,14 @@ def reversible_sum(count):
     sum_result = 0
     i = 2
     while count > 0:
-        square = i * i
-        reverse = get_reverse(square)
-        if is_prime(i) and reverse != square and is_square_root_prime(reverse):
-            sum_result += i
-            count -= 1
-            print("prime number:", i, "square of prime number:", square)
-            print("reverse of prime square:", reverse)
+        if is_prime(i):
+            square = i * i
+            reverse = get_reverse(square)
+            if reverse != square and is_square_root_prime(reverse):
+                sum_result += i
+                count -= 1
+                print("prime number:", i, "square of prime number:", square)
+                print("reverse of prime square:", reverse)
         i += 1
     return sum_result
 
@@ -37,4 +38,4 @@ def is_prime(x):
     return True
 
 if __name__ == "__main__":
-    print("Your sum is:", reversible_sum(5))
+    print("Your sum is:", reversible_sum(50))
