@@ -29,12 +29,13 @@ class State:
                 s += str(val) + "  "
             print(s, "|", self.rowSum[i])
 
-    def validateF_shape(self, points, centers, val):
+    def validateF_shape(self, move):
         row_diff = defaultdict(int)
         col_diff = defaultdict(int)
-        for s in points:
+        val = move.value
+        for s in move.shift:
             dx, dy = s
-            for c in centers:
+            for c in move.centers:
                 row, col = c
                 new_row = row + val * dx
                 new_col = col + val * dy
@@ -55,13 +56,14 @@ class State:
             if col_sum[k] < col_diff[k]:
                 print("Invalid F shape, exceeds col sum at index ", k)
                 return False
-        self.updateGrid(points, centers, val, row_diff, col_diff)
+        self.updateGrid(move, row_diff, col_diff)
         return True
 
-    def updateGrid(self, points, centers, val, row_diff, col_diff):
-        for s in points:
+    def updateGrid(self, move, row_diff, col_diff):
+        val = move.value
+        for s in move.shift:
             dx, dy = s
-            for c in centers:
+            for c in move.centers:
                 row, col = c
                 new_row = row + val * dx
                 new_col = col + val * dy
@@ -71,39 +73,55 @@ class State:
         for k in col_diff:
             self.colSum[k] -= col_diff[k]
 
-def generateF_shape(idx):
-    shift = [(0,0)]
-    if idx < 5:
-        shift.append((-1,0))
-        shift.append((1,0))
-        if idx < 3:
-            shift.append((0,1))
-            if idx == 1:
-                shift.append((-1,-1))
+class Move:
+    def __init__(self, Ftype, center, value):
+        self.Ftype = Ftype
+        self.center = center
+        self.value = value
+        self.generateCenters()
+        self.generateF_shape()
+
+    def generateF_shape(self):
+        shift = [(0,0)]
+        if self.Ftype < 5:
+            shift.append((-1,0))
+            shift.append((1,0))
+            if self.Ftype < 3:
+                shift.append((0,1))
+                if self.Ftype == 1:
+                    shift.append((-1,-1))
+                else:
+                    shift.append((1,-1))
             else:
-                shift.append((1,-1))
+                shift.append((0,-1))
+                if self.Ftype == 3:
+                    shift.append((-1,1))
+                else:
+                    shift.append((1,1))
         else:
             shift.append((0,-1))
-            if idx == 3:
-                shift.append((-1,1))
+            shift.append((0,1))
+            if self.Ftype < 7:
+                shift.append((1,0))
+                if self.Ftype == 5:
+                    shift.append((-1,-1))
+                else:
+                    shift.append((-1,1))
             else:
-                shift.append((1,1))
-    else:
-        shift.append((0,-1))
-        shift.append((0,1))
-        if idx < 7:
-            shift.append((1,0))
-            if idx == 5:
-                shift.append((-1,-1))
-            else:
-                shift.append((-1,1))
-        else:
-            shift.append((-1,0))
-            if idx == 7:
-                shift.append((1,1))
-            else:
-                shift.append((1,-1))
-    return shift
+                shift.append((-1,0))
+                if self.Ftype == 7:
+                    shift.append((1,1))
+                else:
+                    shift.append((1,-1))
+        self.shift = shift
+
+    def generateCenters(self):
+        centers = []
+        row, col = self.center
+        for i in range(self.value):
+            for j in range(self.value):
+                centers.append((row + i, col + j))
+        self.centers = centers
 
 # row_sum = [3, 9, 10, math.inf, 13, 8, 7, 2]
 # col_sum = [9, 12, 12, 10, 8, 8, math.inf, 2]
@@ -113,11 +131,7 @@ col_sum = [13, 20, 22, 28, 30, 36, 35, 39, 49, 39, 39, math.inf, 23, 32, 23, 17,
 
 s = State(17, row_sum, col_sum)
 s.printState()
-p = generateF_shape(1)
-print("=============================================")
-s.validateF_shape(p, [(1,1)], 1)
+
+m = Move(2, (2,2), 2)
+s.validateF_shape(m)
 s.printState()
-# should print error
-s.validateF_shape(p, [(1,2)], 1)
-# should print error
-s.validateF_shape(p, [(16,16)], 1)
