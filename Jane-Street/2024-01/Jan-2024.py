@@ -80,6 +80,7 @@ class State:
         cols = len([s for s in self.colSum if s == 0])
         if (rows == self.size - 1 and cols == self.size - 1):
             print("Found Solution!")
+            self.printState()
             return True
         return False
 
@@ -164,9 +165,11 @@ class Solution:
         three_centers = [(3,7)]
         self.generate3_shapes(three_centers)
         count = 0
-        while count < 20:
+        while count < 200000:
             self.generateOthers()
             count += 1
+            if count % 100 == 0:
+                self.stack[0].printState()
 
     def generate3_shapes(self, three_centers):
         # fill in the grids of size 3
@@ -182,24 +185,27 @@ class Solution:
     def generateOthers(self): 
         s = self.stack.pop(0)
         row, col = s.lastCenter
-        print(row, col)
         for r in range(row, s.size):
-            for c in range(col + 1, s.size):
+            for c in range(0, s.size):
+                # print(r, c)
                 if s.validateCenter(Move(1, (r,c), 2)):
-                    self.generateFshapes(s, (r,c), 2)
-                    return
+                    if self.generateFshapes(s, (r,c), 2) > 0:
+                        return
                 if s.validateCenter(Move(1, (r,c), 1)):
-                    self.generateFshapes(s, (r,c), 1)
-                    return
+                    if self.generateFshapes(s, (r,c), 1) > 0:
+                        return
 
     def generateFshapes(self, s, p, val):
+        count = 0
         for i in range(1, 9):
             new_s = deepcopy(s)
             m = Move(i, p, val)
             if (new_s.validateF_shape(m)):
+                count += 1
                 new_s.lastCenter = p
                 self.stack.insert(0, new_s)
-                new_s.printState()
+                # new_s.printState()
+        return count
 
 def findAllValidCenters(state: State):
     centers = []
@@ -208,6 +214,15 @@ def findAllValidCenters(state: State):
             if state.validateCenter(Move(1, (i,j), 3)):
                 centers.append((i,j))
     print(len(centers))
+
+def generateRangePoints(p1, p2):
+    points = []
+    p1_row, p1_col = p1
+    p2_row, p2_col = p2
+    for i in range(p1_row, p2_row+1):
+        for j in range(p1_col, p2_col+1):
+            points.append((i, j))
+    print(points)
 
 if __name__ == "__main__":
     #row_sum = [3, 9, 10, math.inf, 13, 8, 7, 2]
@@ -218,4 +233,33 @@ if __name__ == "__main__":
 
     s = State(17, row_sum, col_sum)
     sol = Solution(s)
-    sol.depthySolver()
+    # sol.depthySolver()
+    region1 = [(0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (7, 0), (8, 0),
+               (9, 0), (10, 0), (11, 0), (12, 0), (13, 0), (14, 0), (15, 0), (16, 0),
+               (16, 1), (16, 2), (16, 3), (16, 4), (16, 5), (0, 1), (1, 1), (1, 2),
+               (15, 1), (15, 4), (14, 4), (14, 5)]
+    region2 = [(1, 4), (1, 5), (1, 6), (2, 4), (2, 5), (2, 6), (3, 4), (3, 5), (3, 6),
+                (0, 2), (0, 3), (1, 3), (3, 3), (4, 3)]
+    region5 = [(2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1), (8, 1), (9, 1), (10, 1), 
+                (11, 1), (12, 1), (13, 1), (14, 1), (2, 2), (2, 3), (3, 2), (14, 2), 
+                (15, 2), (15, 3)]
+    region6 = [(6, 3), (6, 4), (6, 5), (4, 2), (5, 2), (5, 3), (5, 5), (7, 4)]
+    region13 = [(6, 2), (7, 2), (8, 2), (9, 2), (10, 2), (11, 2), (12, 2), (9, 5),
+                (7, 3), (8, 3), (9, 3), (10, 3), (11, 3), (8, 4), (9, 4), (10, 4)]
+    region3 = [(0, 4), (0, 5), (0, 6), (0, 7), (0, 8), (0, 9), (1, 7), (1, 8), (1, 9),
+                (2, 7), (2, 9), (3, 9)]
+    region7 = [(4, 4), (4, 5), (4, 6), (4, 7), (3, 7), (3, 8), (2, 8), (5, 4)]
+    region8 = [(5, 6), (5, 7), (5, 8), (6, 6), (6, 7), (6, 8), (7, 5), (7, 6), (8, 5),
+                 (8, 6), (4, 8)]
+    region16 = [(13, 2), (13, 3), (13, 4), (13, 5), (13, 6), (13, 7), (12, 3), (12, 4),
+                 (12, 5), (12, 6), (12, 7), (14, 3), (11, 6), (11, 7), (11, 8), (10, 7), (10, 8)]
+    region19 = [(16, 6), (16, 7), (16, 8), (16, 9), (16, 10), (16, 11), 
+                (16, 12), (15, 5), (15, 6), (14, 6)]
+    region20 = [(15, 7), (15, 8), (15, 9), (15, 10), (15, 11), (15, 12),
+                 (15, 13), (14, 12), (14, 13), (16, 13), (13, 9), (14, 9)]
+    region17 = [(12, 8), (12, 9), (12, 10), (13, 10), (11, 9), (13, 8),
+                (14, 8), (14, 7)]
+    region9 = []
+    region10 = []
+    region4 = []
+    generateRangePoints((12, 8),(12,10))
