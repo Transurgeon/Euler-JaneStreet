@@ -8,7 +8,7 @@ class State:
         self.grid = [[0] * size for _ in range(size)]
         self.rowSum = row_sum
         self.colSum = col_sum
-    
+
     def printState(self):
         """
         enumerate can iterate through a list while also giving access to an index
@@ -29,7 +29,7 @@ class State:
                 s += str(val) + "  "
             print(s, "|", self.rowSum[i])
 
-    def validateF_shape(self, move):
+    def validateF_shape(self, move) -> bool:
         row_diff = defaultdict(int)
         col_diff = defaultdict(int)
         val = move.value
@@ -49,11 +49,11 @@ class State:
                     row_diff[new_row] += val
                     col_diff[new_col] += val
         for k in row_diff:
-            if row_sum[k] < row_diff[k]:
+            if self.rowSum[k] < row_diff[k]:
                 print("Invalid F shape, exceeds row sum at index ", k)
                 return False
         for k in col_diff:
-            if col_sum[k] < col_diff[k]:
+            if self.colSum[k] < col_diff[k]:
                 print("Invalid F shape, exceeds col sum at index ", k)
                 return False
         self.updateGrid(move, row_diff, col_diff)
@@ -72,6 +72,39 @@ class State:
             self.rowSum[k] -= row_diff[k]
         for k in col_diff:
             self.colSum[k] -= col_diff[k]
+    
+    def isSolution(self):
+        rows = len([s for s in self.rowSum if s == 0])
+        cols = len([s for s in self.colSum if s == 0])
+        if (rows == self.size - 1 and cols == self.size - 1):
+            print("Found Solution!")
+            return True
+        return False
+
+    def validateCenter(self, move):
+        val = move.value
+
+        for c in move.centers:
+            row, col = c
+            if self.grid[row][col] != 0:
+                print("Invalid Center @ ", row, ", ", col)
+                return False
+        
+        row, col = move.center
+        rowConst = True
+        colConst = True
+        for j in range(row, row + val):
+            rowConst = (self.rowSum[j] >= val**2 * 3) and rowConst
+
+        for j in range(col, col + val):
+            colConst = (self.rowSum[j] >= val**2 * 3) and colConst
+        
+        if not rowConst and not colConst:
+            print("Invalid Center, row or column sum exceeded")
+            return False
+
+        return True
+
 
 class Move:
     def __init__(self, Ftype, center, value):
@@ -123,15 +156,56 @@ class Move:
                 centers.append((row + i, col + j))
         self.centers = centers
 
-# row_sum = [3, 9, 10, math.inf, 13, 8, 7, 2]
-# col_sum = [9, 12, 12, 10, 8, 8, math.inf, 2]
 
-row_sum = [14, 24, 24, 39, 43, math.inf, 22, 23, 29, 28, 34, 35, 29, 26, 26, 24, 20]
-col_sum = [13, 20, 22, 28, 30, 36, 35, 39, 49, 39, 39, math.inf, 23, 32, 23, 17, 13]
+def findCenter(self):
+    pass
 
-s = State(17, row_sum, col_sum)
-s.printState()
+def depthySolver(staty: State):
+    stack = [staty]
+    centers = [(9,8), (9,9),(10,10),(10,9)]
+    count = 0
+    while(count <= 2):
+        s = stack.pop()
+        for c in centers:
+            for i in range(1, 9):
+                m = Move(i, c, 3)
+                
+                if (s.validateF_shape(m)):
+                    stack.append(s)
+                    s.printState()
+        count += 1
+        break
 
-m = Move(2, (2,2), 2)
-s.validateF_shape(m)
-s.printState()
+
+if __name__ == "__main__":
+    #row_sum = [3, 9, 10, math.inf, 13, 8, 7, 2]
+    #col_sum = [9, 12, 12, 10, 8, 8, math.inf, 2]
+
+    row_sum = [14, 24, 24, 39, 43, math.inf, 22, 23, 29, 28, 34, 35, 29, 26, 26, 24, 20]
+    col_sum = [13, 20, 22, 28, 30, 36, 35, 39, 49, 39, 39, math.inf, 23, 32, 23, 17, 13]
+
+    s = State(17, row_sum, col_sum)
+    s.printState()
+    depthySolver(s)
+    """
+    m = Move(5, (3,2), 2)
+
+    s.validateF_shape(m)
+    s.printState()
+
+    s.validateF_shape(Move(1, (1,2), 1))
+    s.printState()
+
+    s.validateF_shape(Move(2, (1,4), 1))
+    s.printState()
+
+    s.validateF_shape(Move(4, (6,1), 1))
+    s.printState()
+
+    s.validateF_shape(Move(6, (2,6), 1))
+    s.printState()
+    print(s.isSolution())
+
+    s.validateF_shape(Move(6, (5,5), 1))
+    s.printState()
+    """
