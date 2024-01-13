@@ -100,7 +100,7 @@ class State:
         for j in range(row, row + val):
             rowConst = (self.rowSum[j] >= val**2 * 3) and rowConst
         for j in range(col, col + val):
-            colConst = (self.rowSum[j] >= val**2 * 3) and colConst
+            colConst = (self.colSum[j] >= val**2 * 3) and colConst
         if not rowConst and not colConst:
             # print("Invalid Center, row or column sum exceeded")
             return False
@@ -181,6 +181,7 @@ class Solution:
                     if not s.isSolution():
                         s = self.stack.pop(0)
                     else:
+                        print("Numbers of iterations: ",  count)
                         return
             count += 1
             if count % 100 == 0:
@@ -204,7 +205,6 @@ class Solution:
                 if s.validateCenter(Move(1, (r,c), 2)):
                     if self.generateFshapes(s, (r,c), 2) > 0:
                         return True
-        s.printState()
         s.lastCenters[1] = (s.size - 1, s.size - 1)
         return False
 
@@ -215,7 +215,6 @@ class Solution:
                 if s.validateCenter(Move(1, (r,c), 1)):
                     if self.generateFshapes(s, (r,c), 1) > 0:
                         return True
-        s.printState()
         s.lastCenters[0] = (s.size - 1, s.size - 1)
         return False
 
@@ -294,7 +293,6 @@ if __name__ == "__main__":
                 (11, 11), (12, 11), (12, 12)]
     region18 = [(13, 11), (13, 12), (13, 13), (13, 14), (14, 10), (14, 11),
                 (14, 14), (14, 15), (11, 12), (11, 13), (12, 13)]
-    # generateRangePoints((13, 11),(13, 14))
 
     row_sum = [3, 9, 10, math.inf, 13, 8, 7, 2]
     col_sum = [9, 12, 12, 10, 8, 8, math.inf, 2]
