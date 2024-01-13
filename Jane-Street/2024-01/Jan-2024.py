@@ -99,8 +99,12 @@ class State:
         colConst = True
         for j in range(row, row + val):
             rowConst = (self.rowSum[j] >= val**2 * 3) and rowConst
+            if self.rowSum[j] < val**2 * 2:
+                return False
         for j in range(col, col + val):
             colConst = (self.colSum[j] >= val**2 * 3) and colConst
+            if self.colSum[j] < val**2 * 2:
+                return False
         if not rowConst and not colConst:
             # print("Invalid Center, row or column sum exceeded")
             return False
@@ -162,13 +166,6 @@ class Solution:
         self.stack = [staty]
 
     def depthySolver(self):
-        region6 = [(6, 3), (6, 4), (6, 5), (4, 2), (5, 2), (5, 3), (5, 5), (7, 4)]
-        region7 = [(4, 4), (4, 5), (4, 6), (4, 7), (3, 7), (3, 8), (2, 8), (5, 4)]
-        region17 = [(12, 8), (12, 9), (12, 10), (13, 10), (11, 9), (13, 8), (14, 8), (14, 7)]
-        region14 = [(9, 8), (9, 9), (10, 9), (10, 10), (11, 10), (11, 11), (12, 11), (12, 12)]
-        #self.generate3_shapes(region6 + region7)
-        #self.generate3_shapes(region17 + region14)
-
         count = 0
         s = self.stack.pop(0)
         while count < 2000:
@@ -200,6 +197,8 @@ class Solution:
 
     def generate2_shapes(self, s):
         row, col = s.lastCenters[1]
+        if (row,col) == (s.size - 1, s.size - 1):
+            return False
         for r in range(row, s.size):
             for c in range(0, s.size):
                 if s.validateCenter(Move(1, (r,c), 2)):
@@ -210,6 +209,8 @@ class Solution:
 
     def generate1_shapes(self, s): 
         row, col = s.lastCenters[0]
+        if (row,col) == (s.size - 1, s.size - 1):
+            return False
         for r in range(row, s.size):
             for c in range(0, s.size):
                 if s.validateCenter(Move(1, (r,c), 1)):
